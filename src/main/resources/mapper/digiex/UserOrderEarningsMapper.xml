@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.UserOrderEarningsMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.UserOrderEarnings">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="user_order_id" jdbcType="BIGINT" property="userOrderId" />
+    <result column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="earnings" jdbcType="DECIMAL" property="earnings" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, user_order_id, member_id, earnings, created_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_order_earnings
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_order_earnings
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.UserOrderEarnings">
+    insert into user_order_earnings (id, user_order_id, member_id, 
+      earnings, created_time)
+    values (#{id,jdbcType=BIGINT}, #{userOrderId,jdbcType=BIGINT}, #{memberId,jdbcType=INTEGER}, 
+      #{earnings,jdbcType=DECIMAL}, #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.UserOrderEarnings">
+    insert into user_order_earnings
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="userOrderId != null">
+        user_order_id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="earnings != null">
+        earnings,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="userOrderId != null">
+        #{userOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="earnings != null">
+        #{earnings,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.UserOrderEarnings">
+    update user_order_earnings
+    <set>
+      <if test="userOrderId != null">
+        user_order_id = #{userOrderId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="earnings != null">
+        earnings = #{earnings,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.UserOrderEarnings">
+    update user_order_earnings
+    set user_order_id = #{userOrderId,jdbcType=BIGINT},
+      member_id = #{memberId,jdbcType=INTEGER},
+      earnings = #{earnings,jdbcType=DECIMAL},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <select id="userOrderEarningsList" resultType="com.caetp.digiex.dto.api.EarningsDTO">
+        SELECT uoe.earnings earnings,uoe.created_time createdTime
+        FROM user_order_earnings uoe
+        LEFT JOIN user_order uo  ON uoe.`user_order_id` = uo.id
+        WHERE uo.id = #{userOrderId} AND uo.`member_id` = #{memberId}
+        ORDER BY uoe.`created_time` DESC
+    </select>
+
+  <select id="selectTotalEarnings" resultType="Double">
+    SELECT  SUM(uoe.`earnings`) totalEarnings
+    FROM user_order uo,user_order_earnings uoe
+    WHERE uo.`id` = uoe.`user_order_id`
+    AND uo.`member_id` = #{memberId}
+    AND uo.`id` = #{userOrderId}
+  </select>
+
+  <select id="orderEarnings" resultType="com.caetp.digiex.dto.api.EarningsOrderDTO">
+    SELECT t.userOrderId, SUM(t.earnings) earnings, t.memberId
+    FROM
+      (SELECT uo.id userOrderId, SUM(mto.earnings) earnings, m.member_id memberId
+      FROM user_order uo
+      LEFT JOIN member m ON uo.member_id = m.member_id
+      LEFT JOIN mt5_user_order mto ON mto.user_order_id = uo.id
+      WHERE uo.status IN (1, 2, 3) AND DATE_FORMAT(mto.sell_time,'%Y-%m-%d') = DATE_FORMAT(#{dateTime},'%Y-%m-%d')
+      GROUP BY uo.id
+      UNION ALL
+      SELECT uo.id userOrderId, 0.0 earnings, m.member_id memberId
+      FROM user_order uo
+      LEFT JOIN member m ON uo.member_id = m.member_id
+      WHERE uo.status IN (1, 2)) t
+    GROUP BY t.userOrderId
+  </select>
+
+
+</mapper>

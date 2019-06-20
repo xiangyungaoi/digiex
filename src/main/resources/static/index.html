@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<link rel="shortcut icon" href="img/favicon.ico" />
+	<link rel="stylesheet" href="css/reset.css" />
+	<link rel="stylesheet" href="css/style.css" />
+	<link rel="stylesheet" href="js/kkpager/kkpager.css" />
+	<title>数市交易所管理系统</title>
+</head>
+
+<body>
+<div class="js-user"></div>
+<!--<section>
+	<div class="warp">
+		<div class="clearfix">
+			<div class="sidebar fl">
+				<ul id="indexList" class="user-nav-list">
+					<li class="ai-nav active bB" id="undone" data-name="0">
+						<a href="javascript:void(0)" name="ai-administration.html"  class="ai-iframeurl"><span class="menu-text size16px c222222">AI管理</span></a>
+					</li>
+					<li class="user-nav bB" id="positions" data-name="1">
+						<a href="javascript:void(0)" name="positions-order.html"   class="ai-iframeurl"><span class="menu-text size16px c222222">标签管理</span></a>
+					</li>
+				</ul>
+			</div>
+			<div class="main-content fl">
+				<iframe class="iframe clearfix" id="ai-iframe" style="width: 100%; height: 100%;" name="iframe" frameborder="0" src="undone-order.html">  </iframe>
+			</div>
+		</div>
+	</div>
+</section>-->
+<section class="section bf3f5f9">
+	<div class="warp">
+		<div class="m-btn js-add text-center cursor size18px cffffff" data-type="add">+新增</div>
+		<div class="table margB40">
+			<table>
+				<thead>
+				<tr>
+					<th style="width: 6%;">AI名称</th>
+					<th style="width: 6%;">币种</th>
+					<th style="width: 6%;">准确率</th>
+					<th style="width: 6%;">盈利订单</th>
+					<th style="width: 6%;">已平仓收益</th>
+					<th style="width: 6%;">亏损订单</th>
+					<th style="width: 6%;">月盈利率</th>
+					<th style="width: 6%;">最大盈利</th>
+					<th style="width: 6%;">最大亏损</th>
+					<th style="width: 6%;">累计交易</th>
+					<th style="width: 6%;">最大手笔</th>
+					<th style="width: 6%;">平均盈利</th>
+					<th style="width: 6%;">状态</th>
+					<th style="width: 12%;">协议名称</th>
+					<th style="width: 10%;">操作</th>
+				</tr>
+				</thead>
+				<tbody id="aiRobotList"></tbody>
+			</table>
+		</div>
+		<div id="kkpager" style="height: 50px;"></div>
+	</div>
+</section>
+<div class="index">0</div>
+<!--新增编辑-->
+<script type="text/html" id="add-main">
+	<div class="layer-box">
+		<ul class="">
+			<li class="margB15">
+				<label for="" class="label-b">AI名称：</label>
+				<input type="text" name="ai-name" class="input" />
+			</li>
+			<li class="margB15">
+				<label for="" class="label-b">币种：</label>
+				<input type="text" name="ai-type" class="input" />
+			</li>
+			<li class="margB15">
+				<label for="" class="label-b">币种名称：</label>
+				<input type="text" name="ai-type-name" class="input" />
+			</li>
+			<li class="margB15">
+				<label for="" class="label-b">协议名称：</label>
+				<input type="text" name="agreement-name" class="input" />
+			</li>
+			<form class="upfORM" id="js-form">
+			<li class="margB15">
+				<label for="" class="label-b">上传协议：</label>
+				<input type="hidden" id="fileUrl"/>
+				<input type="file" name="file" class="input" value=""  id="file"/>
+			</li>
+			</form>
+			<li class="margB15">
+				<label for="" class="label-b">状态：</label>
+				<input type="radio" id="open" data-id="open" name="state" /><label for="open" class="margR20 size14px c222222 margL5">开启</label>
+				<input type="radio" id="close" data-id="close" name="state" /><label for="close" class="size14px c222222 margL5">关闭</label>
+			</li>
+			<li class="margB15">
+				<label for="" class="label-b">杠杆率：</label>
+				<input type="text" name="leverageTimes" maxlength="4" class="input" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" />
+			</li>
+			<li class="margB15">
+				<label for="" class="label-c">用户初始保证金与本金比例：</label>
+				<input type="text" name="depositRate" placeholder="保证金" maxlength="4" class="input-type" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" /> : <input type="text" maxlength="4" placeholder="本金" name="feeRate" class="input-type" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" />
+			</li>
+			<li class="margB15">
+				<label for="" class="label-d">用户终止跟单触发条件：（剩余保证金 / 初始保证金  ）*100% <</label>
+				<input type="text" name="stopLossLimit" maxlength="4" class="input-type-loss" onkeyup="this.value=this.value.replace(/\D|^0/g,'')" /> %
+			</li>
+			<li class="margB15" id="feature-info">
+			</li>
+		</ul>
+		<div class="layerBtn clearfix margL115">
+			<button type="submit" class="fl but bffa10a cffffff margR20 bff8a3b js-sure">确定</button>
+			<button class="fr but bffffff bA cb5b7bc  layui-layer-close js-cancel">取消</button>
+		</div>
+	</div>
+</script>
+<!--协议名称-->
+<script type="text/html" id="agreement-main">
+	<div class="layer-box">
+		<div id="viewProtocol" class="layer-cont size12px c222222 lineHeight25px">
+
+		</div>
+	</div>
+</script>
+<!--删除-->
+<script type="text/html" id="delete-main">
+	<div class="layer-box">
+		<div class="size15px c000f38 margB40">确定要删除“<span id="delete-ai-name"></span>”吗？</div>
+		<div class="layerBtn clearfix">
+			<button class="fl but bffa10a cffffff margR20 bff8a3b js-delete-sure">确定</button>
+			<button class="fr but bffffff bA c8f9cae layui-layer-close">取消</button>
+		</div>
+	</div>
+</script>
+<script type="text/html"  id="aiRobotList-info">
+	<%for(var i in data){%>
+	<tr>
+		<td style="display: none"><%=data[i].id%></td>
+		<td><%=data[i].name%></td>
+		<td><%=data[i].aiType%></td>
+		<td><%=data[i].accuracyRate%>%</td>
+		<td><%=data[i].profitOrders%>笔</td>
+		<td><%=data[i].sellEarnings%>$</td>
+		<td><%=data[i].lossOrders%>笔</td>
+		<td><%=data[i].monthlyProfitRate%>%</td>
+		<td><%=data[i].maxProfit%>$</td>
+		<td><%=data[i].maxLoss%>$</td>
+		<td><%=data[i].totalTransactions%>笔</td>
+		<td><%=data[i].maxStandardHands%>手</td>
+		<td><%=data[i].averageProfit%>$</td>
+		<%if(data[i].isActivated==true){%>
+		<td class="c00ab52">开启</td>
+		<%}
+		else{%>
+		<td class="cff5649">关闭</td>
+		<% } %>
+		<td class="c1f88ff js-agreement cursor"" data-title="<%=data[i].agreementName%>" data-id="<%=data[i].agreementUrl%>">《<%=data[i].agreementName%>》</td>
+		<td>
+			<span data-type="edit" data-id="<%=data[i].id%>"  class="paddingLR15 size12px c1f88ff cursor js-add" >编辑</span>
+			<span data-id="<%=data[i].id%>" data-name="<%=data[i].name%>" class="paddingLR15 size12px c1f88ff cursor js-delete">删除</span>
+		</td>
+	</tr>
+	<%}%>
+</script>
+
+<script type="text/html" id="feature-info-list">
+	<div style="display: -webkit-box;">
+		<div><label for="" class="label-b">AI标签：</label></div>
+		<div style="width: 420px;">
+			<% for(var i in data) {%>
+			<input type="checkbox" name="label-name" class="input-label" data-name="<%=data[i].feature%>" value=<%=data[i].feature%> /><%=data[i].feature%>
+			<%}%>
+		</div>
+	</div>
+</script>
+</body>
+<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript" src="js/style.js"></script>
+<script type="text/javascript" src="utils/template.js"></script>
+<script type="text/javascript" src="utils/data.js"></script>
+<script type="text/javascript" src="utils/utils.js"></script>
+<script type="text/javascript" src="js/layer/layer.js"></script>
+<script type="text/javascript" src="js/kkpager/kkpager.js"></script>
+<script type="text/javascript" src="ps/index.js"></script>
+
+</html>

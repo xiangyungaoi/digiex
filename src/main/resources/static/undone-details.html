@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="img/favicon.ico" />
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="js/kkpager/kkpager.css" />
+		<title>未完成订单</title>
+	</head>
+	<body>
+		<div class="paddingA30">
+			<div class="margB40">
+				<div class="title margB36">
+					<span class="size18px c222222">未完成订单</span>
+					<span class="size18px c222222 icon">></span>
+					<span class="size18px c222222" id="js-detail-aiName"></span>
+					<span class="size18px c222222 icon">></span>
+					<span class="size18px c222222">订单详情</span>
+				</div>
+				<div id="js-undone-order-detail"></div>
+				<ul class="margB40">
+					<li class="margB15">
+						<label for="" class="label-b">订单编号：</label>
+						<span class="size14px c222222" id="js-detail-orderId"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">截止时间：</label>
+						<span class="size14px c222222" id="js-detail-cutoff"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总手数：</label>
+						<span class="size14px c222222" id="js-detail-totalHands">2.0</span>
+					</li>
+					<li class="margB36">
+						<label for="" class="label-b">总金额：</label>
+						<span class="size14px c222222" id="js-detail-totalFee"></span>
+					</li>
+				</ul>
+				<button class="size14px cffffff bff8a3b btn js-down-order">在MT5中下单</button>
+			</div>
+			<div class="table margB40">
+				<div class="size16px c222222 margB19">用户列表</div>
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 20%;">用户姓名</th>
+							<th style="width: 20%;">手机号码</th>
+							<th style="width: 20%;">下单时间</th>
+							<th style="width: 20%;">手数</th>
+							<th style="width: 20%;">金额（$）</th>
+						</tr>
+					</thead>
+					<tbody id="undone-order-detail"></tbody>
+				</table>
+			</div>
+			<div id="kkpager" class="pull-right clearfix" style="height: 50px;"></div>
+		</div>
+		<!--下单-->
+		<script type="text/html" id="down-order-main">
+			<div class="layer-box">
+				<ul class="">
+					<li class="margB15">
+						<label for="" class="label-b">总手数：</label>
+						<span class="size14px c222222 js-total-hands"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总金额：</label>
+						<span class="size14px c222222 js-total-fee"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">方向：</label>
+						<select class="sbox width100px size14px c293645 status" id="direction">
+							<option value="">请选择</option>
+							<option value="0">买入</option>
+							<option value="1">卖出</option>
+						</select>
+					</li>
+
+					<li class="margB15">
+						<label for="" class="label-b">币种：</label>
+						<input type="text" class="input" name="currency"/>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓时间：</label>
+						<input type="text" class="input" id="buyTime" name="buyTime"/>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓点数：</label>
+						<input type="text" class="input" name="buyPrice"/>
+					</li>
+					<li class="margB36">
+						<label for="" class="label-b">建仓手续费：</label>
+						<input type="text" class="input" name="buyServiceFee"/><span class="size14px c222222 margL5">$</span>
+					</li>
+				</ul>
+				<div class="layerBtn clearfix margL115">
+					<button class="fl but bffa10a cffffff margR20 bff8a3b js-buy-sure">确定</button>
+					<button class="fr but bffffff bA cb5b7bc  layui-layer-close">取消</button>
+				</div>
+			</div>
+		</script>
+		<script type="text/html" id="undone-order-detail-list">
+			<%for(var i in data){%>
+			<tr>
+				<td><%=data[i].nickName%></td>
+				<td><%=data[i].mobile%></td>
+				<td><%=data[i].createdTime%></td>
+				<td><%=data[i].standardHands%></td>
+				<td><%=data[i].fee%></td>
+			</tr>
+			<%}%>
+		</script>
+		<!--<script id="js-undone-order-detail-list" type="text/html">
+			<%for(var i in data){%>
+			<ul class="margB40">
+				<li class="margB15">
+					<label for="" class="label-b">订单编号：</label>
+					<span class="size14px c222222"><%=data[i].orderId%></span>
+				</li>
+				<li class="margB15">
+					<label for="" class="label-b">截止时间：</label>
+					<span class="size14px c222222"><%=data[i].cutoff%></span>
+				</li>
+				<li class="margB15">
+					<label for="" class="label-b">总手数：</label>
+					<span class="size14px c222222"><%=data[i].totalStandardHands%></span>
+				</li>
+				<li class="margB15">
+					<label for="" class="label-b">总金额：</label>
+					<span class="size14px c222222">$<%=data[i].totalFee%></span>
+				</li>
+				<li class="margB15">
+
+			</ul>
+			<%}%>
+		</script>-->
+	</body>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/style.js"></script>
+	<script type="text/javascript" src="utils/template.js"></script>
+	<script type="text/javascript" src="js/laydate/laydate.js"></script>
+	<script type="text/javascript" src="utils/data.js"></script>
+	<script type="text/javascript" src="utils/utils.js"></script>
+	<script type="text/javascript" src="js/layer/layer.js"></script>
+	<script type="text/javascript" src="js/kkpager/kkpager.js"></script>
+	<script type="text/javascript" src="ps/undone-detail.js"></script>
+</html>

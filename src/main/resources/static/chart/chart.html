@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>实时行情</title>
+    <script type="text/javascript" src="tv.js"></script>
+</head>
+    <body>
+        <!-- TradingView Widget BEGIN -->
+        <div class="tradingview-widget-container">
+            <div id="tradingview_9476b" style="height: 900px;"></div>
+            <div class="tradingview-widget-copyright"></div>
+            <script type="text/javascript">
+                new TradingView.widget(
+                    {
+                        "autosize": true,
+//                        "width": 600,
+//                        "height": 400,
+                        "symbol": "FX:EURUSD",
+                        "interval": "1",
+                        "timezone": "Asia/Shanghai",
+                        "theme": "Light",
+                        "style": "1",
+                        "locale": "zh_CN",
+                        "toolbar_bg": "#f1f3f6",
+                        "enable_publishing": false,
+                        "allow_symbol_change": true,
+                        "container_id": "tradingview_9476b",
+                        "disabled_features": ["volume_force_overlay"],
+                        /*"overrides" :{
+                            'paneProperties.background': '#162431', // 蜡烛样式
+                            'mainSeriesProperties.candleStyle.upColor': '#df5f61',
+                            'mainSeriesProperties.candleStyle.downColor': '#64ae74',
+                            'mainSeriesProperties.candleStyle.drawWick': true,
+                            'mainSeriesProperties.candleStyle.wickUpColor': '#df5f61',
+                            'mainSeriesProperties.candleStyle.wickDownColor': '#64ae74',
+                            'mainSeriesProperties.candleStyle.drawBorder': true,
+                            'mainSeriesProperties.candleStyle.borderUpColor': '#df5f61',
+                            'mainSeriesProperties.candleStyle.borderDownColor': '#64ae74',
+                            'mainSeriesProperties.candleStyle.barColorsOnPrevClose': false
+                        }*/
+                    }
+                );
+            </script>
+        </div>
+
+        <!-- TradingView Widget END -->
+    </body>
+</html>

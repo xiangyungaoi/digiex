@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.UserMt5OrderMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.UserMt5Order">
+    <id column="order" jdbcType="BIGINT" property="order" />
+    <result column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="login" jdbcType="INTEGER" property="login" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="volume_initial" jdbcType="DOUBLE" property="volumeInitial" />
+    <result column="volume_current" jdbcType="DOUBLE" property="volumeCurrent" />
+    <result column="profit" jdbcType="DOUBLE" property="profit" />
+    <result column="rate_margin" jdbcType="DOUBLE" property="rateMargin" />
+    <result column="rate_profit" jdbcType="DOUBLE" property="rateProfit" />
+    <result column="storage" jdbcType="DOUBLE" property="storage" />
+    <result column="contract_size" jdbcType="INTEGER" property="contractSize" />
+    <result column="digits" jdbcType="INTEGER" property="digits" />
+    <result column="digits_currency" jdbcType="INTEGER" property="digitsCurrency" />
+    <result column="price_current" jdbcType="DOUBLE" property="priceCurrent" />
+    <result column="price_order" jdbcType="DOUBLE" property="priceOrder" />
+    <result column="price_open" jdbcType="DOUBLE" property="priceOpen" />
+    <result column="priceSL" jdbcType="DOUBLE" property="pricesl" />
+    <result column="priceTP" jdbcType="DOUBLE" property="pricetp" />
+    <result column="price_trigger" jdbcType="DOUBLE" property="priceTrigger" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="reason" jdbcType="INTEGER" property="reason" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="action" jdbcType="INTEGER" property="action" />
+    <result column="type_fill" jdbcType="INTEGER" property="typeFill" />
+    <result column="time_setup" jdbcType="TIMESTAMP" property="timeSetup" />
+    <result column="time_done" jdbcType="TIMESTAMP" property="timeDone" />
+    <result column="time_expiration" jdbcType="TIMESTAMP" property="timeExpiration" />
+    <result column="time_update" jdbcType="TIMESTAMP" property="timeUpdate" />
+    <result column="type_time" jdbcType="TIMESTAMP" property="typeTime" />
+    <result column="spread" jdbcType="BIGINT" property="spread" />
+    <result column="expiration" jdbcType="INTEGER" property="expiration" />
+    <result column="leverage" jdbcType="BIGINT" property="leverage" />
+    <result column="position_id" jdbcType="BIGINT" property="positionId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `order`, member_id, login, symbol, volume_initial, volume_current, profit, rate_margin,
+    rate_profit, storage, contract_size, digits, digits_currency, price_current, price_order, 
+    price_open, priceSL, priceTP, price_trigger, `comment`, reason, state, `type`, `action`,
+    type_fill, time_setup, time_done, time_expiration, time_update, type_time, spread, 
+    expiration, leverage, position_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_mt5_order
+    where `order` = #{order,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_mt5_order
+    where `order` = #{order,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.UserMt5Order">
+    insert into user_mt5_order (`order`, member_id, login,
+      symbol, volume_initial, volume_current, 
+      profit, rate_margin, rate_profit, 
+      storage, contract_size, digits, 
+      digits_currency, price_current, price_order, 
+      price_open, priceSL, priceTP, 
+      price_trigger, `comment`, reason,
+      state, `type`, `action`,
+      type_fill, time_setup, time_done, 
+      time_expiration, time_update, type_time, 
+      spread, expiration, leverage, 
+      position_id)
+    values (#{order,jdbcType=BIGINT}, #{memberId,jdbcType=INTEGER}, #{login,jdbcType=INTEGER}, 
+      #{symbol,jdbcType=VARCHAR}, #{volumeInitial,jdbcType=DOUBLE}, #{volumeCurrent,jdbcType=DOUBLE}, 
+      #{profit,jdbcType=DOUBLE}, #{rateMargin,jdbcType=DOUBLE}, #{rateProfit,jdbcType=DOUBLE}, 
+      #{storage,jdbcType=DOUBLE}, #{contractSize,jdbcType=INTEGER}, #{digits,jdbcType=INTEGER}, 
+      #{digitsCurrency,jdbcType=INTEGER}, #{priceCurrent,jdbcType=DOUBLE}, #{priceOrder,jdbcType=DOUBLE}, 
+      #{priceOpen,jdbcType=DOUBLE}, #{pricesl,jdbcType=DOUBLE}, #{pricetp,jdbcType=DOUBLE}, 
+      #{priceTrigger,jdbcType=DOUBLE}, #{comment,jdbcType=VARCHAR}, #{reason,jdbcType=INTEGER}, 
+      #{state,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, #{action,jdbcType=INTEGER}, 
+      #{typeFill,jdbcType=INTEGER}, #{timeSetup,jdbcType=TIMESTAMP}, #{timeDone,jdbcType=TIMESTAMP}, 
+      #{timeExpiration,jdbcType=TIMESTAMP}, #{timeUpdate,jdbcType=TIMESTAMP}, #{typeTime,jdbcType=TIMESTAMP}, 
+      #{spread,jdbcType=BIGINT}, #{expiration,jdbcType=INTEGER}, #{leverage,jdbcType=BIGINT}, 
+      #{positionId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.UserMt5Order">
+    insert into user_mt5_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="order != null">
+        `order`,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="login != null">
+        login,
+      </if>
+      <if test="symbol != null">
+        symbol,
+      </if>
+      <if test="volumeInitial != null">
+        volume_initial,
+      </if>
+      <if test="volumeCurrent != null">
+        volume_current,
+      </if>
+      <if test="profit != null">
+        profit,
+      </if>
+      <if test="rateMargin != null">
+        rate_margin,
+      </if>
+      <if test="rateProfit != null">
+        rate_profit,
+      </if>
+      <if test="storage != null">
+        storage,
+      </if>
+      <if test="contractSize != null">
+        contract_size,
+      </if>
+      <if test="digits != null">
+        digits,
+      </if>
+      <if test="digitsCurrency != null">
+        digits_currency,
+      </if>
+      <if test="priceCurrent != null">
+        price_current,
+      </if>
+      <if test="priceOrder != null">
+        price_order,
+      </if>
+      <if test="priceOpen != null">
+        price_open,
+      </if>
+      <if test="pricesl != null">
+        priceSL,
+      </if>
+      <if test="pricetp != null">
+        priceTP,
+      </if>
+      <if test="priceTrigger != null">
+        price_trigger,
+      </if>
+      <if test="comment != null">
+        `comment`,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="action != null">
+        `action`,
+      </if>
+      <if test="typeFill != null">
+        type_fill,
+      </if>
+      <if test="timeSetup != null">
+        time_setup,
+      </if>
+      <if test="timeDone != null">
+        time_done,
+      </if>
+      <if test="timeExpiration != null">
+        time_expiration,
+      </if>
+      <if test="timeUpdate != null">
+        time_update,
+      </if>
+      <if test="typeTime != null">
+        type_time,
+      </if>
+      <if test="spread != null">
+        spread,
+      </if>
+      <if test="expiration != null">
+        expiration,
+      </if>
+      <if test="leverage != null">
+        leverage,
+      </if>
+      <if test="positionId != null">
+        position_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="order != null">
+        #{order,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="login != null">
+        #{login,jdbcType=INTEGER},
+      </if>
+      <if test="symbol != null">
+        #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="volumeInitial != null">
+        #{volumeInitial,jdbcType=DOUBLE},
+      </if>
+      <if test="volumeCurrent != null">
+        #{volumeCurrent,jdbcType=DOUBLE},
+      </if>
+      <if test="profit != null">
+        #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="rateMargin != null">
+        #{rateMargin,jdbcType=DOUBLE},
+      </if>
+      <if test="rateProfit != null">
+        #{rateProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="storage != null">
+        #{storage,jdbcType=DOUBLE},
+      </if>
+      <if test="contractSize != null">
+        #{contractSize,jdbcType=INTEGER},
+      </if>
+      <if test="digits != null">
+        #{digits,jdbcType=INTEGER},
+      </if>
+      <if test="digitsCurrency != null">
+        #{digitsCurrency,jdbcType=INTEGER},
+      </if>
+      <if test="priceCurrent != null">
+        #{priceCurrent,jdbcType=DOUBLE},
+      </if>
+      <if test="priceOrder != null">
+        #{priceOrder,jdbcType=DOUBLE},
+      </if>
+      <if test="priceOpen != null">
+        #{priceOpen,jdbcType=DOUBLE},
+      </if>
+      <if test="pricesl != null">
+        #{pricesl,jdbcType=DOUBLE},
+      </if>
+      <if test="pricetp != null">
+        #{pricetp,jdbcType=DOUBLE},
+      </if>
+      <if test="priceTrigger != null">
+        #{priceTrigger,jdbcType=DOUBLE},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="action != null">
+        #{action,jdbcType=INTEGER},
+      </if>
+      <if test="typeFill != null">
+        #{typeFill,jdbcType=INTEGER},
+      </if>
+      <if test="timeSetup != null">
+        #{timeSetup,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeDone != null">
+        #{timeDone,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeExpiration != null">
+        #{timeExpiration,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeUpdate != null">
+        #{timeUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeTime != null">
+        #{typeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spread != null">
+        #{spread,jdbcType=BIGINT},
+      </if>
+      <if test="expiration != null">
+        #{expiration,jdbcType=INTEGER},
+      </if>
+      <if test="leverage != null">
+        #{leverage,jdbcType=BIGINT},
+      </if>
+      <if test="positionId != null">
+        #{positionId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.UserMt5Order">
+    update user_mt5_order
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="login != null">
+        login = #{login,jdbcType=INTEGER},
+      </if>
+      <if test="symbol != null">
+        symbol = #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="volumeInitial != null">
+        volume_initial = #{volumeInitial,jdbcType=DOUBLE},
+      </if>
+      <if test="volumeCurrent != null">
+        volume_current = #{volumeCurrent,jdbcType=DOUBLE},
+      </if>
+      <if test="profit != null">
+        profit = #{profit,jdbcType=DOUBLE},
+      </if>
+      <if test="rateMargin != null">
+        rate_margin = #{rateMargin,jdbcType=DOUBLE},
+      </if>
+      <if test="rateProfit != null">
+        rate_profit = #{rateProfit,jdbcType=DOUBLE},
+      </if>
+      <if test="storage != null">
+        storage = #{storage,jdbcType=DOUBLE},
+      </if>
+      <if test="contractSize != null">
+        contract_size = #{contractSize,jdbcType=INTEGER},
+      </if>
+      <if test="digits != null">
+        digits = #{digits,jdbcType=INTEGER},
+      </if>
+      <if test="digitsCurrency != null">
+        digits_currency = #{digitsCurrency,jdbcType=INTEGER},
+      </if>
+      <if test="priceCurrent != null">
+        price_current = #{priceCurrent,jdbcType=DOUBLE},
+      </if>
+      <if test="priceOrder != null">
+        price_order = #{priceOrder,jdbcType=DOUBLE},
+      </if>
+      <if test="priceOpen != null">
+        price_open = #{priceOpen,jdbcType=DOUBLE},
+      </if>
+      <if test="pricesl != null">
+        priceSL = #{pricesl,jdbcType=DOUBLE},
+      </if>
+      <if test="pricetp != null">
+        priceTP = #{pricetp,jdbcType=DOUBLE},
+      </if>
+      <if test="priceTrigger != null">
+        price_trigger = #{priceTrigger,jdbcType=DOUBLE},
+      </if>
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=INTEGER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="action != null">
+        `action` = #{action,jdbcType=INTEGER},
+      </if>
+      <if test="typeFill != null">
+        type_fill = #{typeFill,jdbcType=INTEGER},
+      </if>
+      <if test="timeSetup != null">
+        time_setup = #{timeSetup,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeDone != null">
+        time_done = #{timeDone,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeExpiration != null">
+        time_expiration = #{timeExpiration,jdbcType=TIMESTAMP},
+      </if>
+      <if test="timeUpdate != null">
+        time_update = #{timeUpdate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="typeTime != null">
+        type_time = #{typeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="spread != null">
+        spread = #{spread,jdbcType=BIGINT},
+      </if>
+      <if test="expiration != null">
+        expiration = #{expiration,jdbcType=INTEGER},
+      </if>
+      <if test="leverage != null">
+        leverage = #{leverage,jdbcType=BIGINT},
+      </if>
+      <if test="positionId != null">
+        position_id = #{positionId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where `order` = #{order,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.UserMt5Order">
+    update user_mt5_order
+    set member_id = #{memberId,jdbcType=INTEGER},
+      login = #{login,jdbcType=INTEGER},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      volume_initial = #{volumeInitial,jdbcType=DOUBLE},
+      volume_current = #{volumeCurrent,jdbcType=DOUBLE},
+      profit = #{profit,jdbcType=DOUBLE},
+      rate_margin = #{rateMargin,jdbcType=DOUBLE},
+      rate_profit = #{rateProfit,jdbcType=DOUBLE},
+      storage = #{storage,jdbcType=DOUBLE},
+      contract_size = #{contractSize,jdbcType=INTEGER},
+      digits = #{digits,jdbcType=INTEGER},
+      digits_currency = #{digitsCurrency,jdbcType=INTEGER},
+      price_current = #{priceCurrent,jdbcType=DOUBLE},
+      price_order = #{priceOrder,jdbcType=DOUBLE},
+      price_open = #{priceOpen,jdbcType=DOUBLE},
+      priceSL = #{pricesl,jdbcType=DOUBLE},
+      priceTP = #{pricetp,jdbcType=DOUBLE},
+      price_trigger = #{priceTrigger,jdbcType=DOUBLE},
+      `comment` = #{comment,jdbcType=VARCHAR},
+      reason = #{reason,jdbcType=INTEGER},
+      state = #{state,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=INTEGER},
+      `action` = #{action,jdbcType=INTEGER},
+      type_fill = #{typeFill,jdbcType=INTEGER},
+      time_setup = #{timeSetup,jdbcType=TIMESTAMP},
+      time_done = #{timeDone,jdbcType=TIMESTAMP},
+      time_expiration = #{timeExpiration,jdbcType=TIMESTAMP},
+      time_update = #{timeUpdate,jdbcType=TIMESTAMP},
+      type_time = #{typeTime,jdbcType=TIMESTAMP},
+      spread = #{spread,jdbcType=BIGINT},
+      expiration = #{expiration,jdbcType=INTEGER},
+      leverage = #{leverage,jdbcType=BIGINT},
+      position_id = #{positionId,jdbcType=BIGINT}
+    where `order` = #{order,jdbcType=BIGINT}
+  </update>
+</mapper>

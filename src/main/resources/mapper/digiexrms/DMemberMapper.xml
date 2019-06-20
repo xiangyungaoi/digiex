@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.rmsmapper.DMemberMapper">
+    <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.DMember">
+        <id column="member_id" jdbcType="INTEGER" property="memberId" />
+        <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+        <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+        <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+        <result column="is_real" jdbcType="BIT" property="isReal" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="deal_password" jdbcType="VARCHAR" property="dealPassword" />
+        <result column="token" jdbcType="VARCHAR" property="token" />
+        <result column="avatar_image" jdbcType="VARCHAR" property="avatarImage" />
+        <result column="account_status" jdbcType="BIT" property="accountStatus" />
+        <result column="member_level" jdbcType="INTEGER" property="memberLevel" />
+        <result column="invitation_code" jdbcType="INTEGER" property="invitationCode" />
+        <result column="created_by" jdbcType="INTEGER" property="createdBy" />
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+        <result column="updated_by" jdbcType="INTEGER" property="updatedBy" />
+        <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+        <result column="invited_by" jdbcType="INTEGER" property="invitedBy" />
+        <result column="invited_time" jdbcType="TIMESTAMP" property="invitedTime" />
+        <result column="old_invited_by" jdbcType="INTEGER" property="oldInvitedBy" />
+        <result column="update_invited_desc" jdbcType="VARCHAR" property="updateInvitedDesc" />
+        <result column="update_invited_time" jdbcType="TIMESTAMP" property="updateInvitedTime" />
+        <result column="legal_member_id" jdbcType="INTEGER" property="legalMemberId" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        member_id, area_code, mobile, nick_name, is_real, password, deal_password, token,
+        avatar_image, account_status, member_level, invitation_code, created_by, created_time,
+        updated_by, updated_time, invited_by, invited_time, old_invited_by, update_invited_desc,
+        update_invited_time, legal_member_id
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from d_member
+        where member_id = #{memberId,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from d_member
+        where member_id = #{memberId,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.caetp.digiex.entity.DMember">
+        insert into d_member (member_id, area_code, mobile,
+        nick_name, is_real, password,
+        deal_password, token, avatar_image,
+        account_status, member_level, invitation_code,
+        created_by, created_time, updated_by,
+        updated_time, invited_by, invited_time,
+        old_invited_by, update_invited_desc, update_invited_time,
+        legal_member_id)
+        values (#{memberId,jdbcType=INTEGER}, #{areaCode,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR},
+        #{nickName,jdbcType=VARCHAR}, #{isReal,jdbcType=BIT}, #{password,jdbcType=VARCHAR},
+        #{dealPassword,jdbcType=VARCHAR}, #{token,jdbcType=VARCHAR}, #{avatarImage,jdbcType=VARCHAR},
+        #{accountStatus,jdbcType=BIT}, #{memberLevel,jdbcType=INTEGER}, #{invitationCode,jdbcType=INTEGER},
+        #{createdBy,jdbcType=INTEGER}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=INTEGER},
+        #{updatedTime,jdbcType=TIMESTAMP}, #{invitedBy,jdbcType=INTEGER}, #{invitedTime,jdbcType=TIMESTAMP},
+        #{oldInvitedBy,jdbcType=INTEGER}, #{updateInvitedDesc,jdbcType=VARCHAR}, #{updateInvitedTime,jdbcType=TIMESTAMP},
+        #{legalMemberId,jdbcType=INTEGER})
+    </insert>
+    <insert id="insertSelective" parameterType="com.caetp.digiex.entity.DMember">
+        insert into d_member
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="areaCode != null">
+                area_code,
+            </if>
+            <if test="mobile != null">
+                mobile,
+            </if>
+            <if test="nickName != null">
+                nick_name,
+            </if>
+            <if test="isReal != null">
+                is_real,
+            </if>
+            <if test="password != null">
+                password,
+            </if>
+            <if test="dealPassword != null">
+                deal_password,
+            </if>
+            <if test="token != null">
+                token,
+            </if>
+            <if test="avatarImage != null">
+                avatar_image,
+            </if>
+            <if test="accountStatus != null">
+                account_status,
+            </if>
+            <if test="memberLevel != null">
+                member_level,
+            </if>
+            <if test="invitationCode != null">
+                invitation_code,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+            <if test="invitedBy != null">
+                invited_by,
+            </if>
+            <if test="invitedTime != null">
+                invited_time,
+            </if>
+            <if test="oldInvitedBy != null">
+                old_invited_by,
+            </if>
+            <if test="updateInvitedDesc != null">
+                update_invited_desc,
+            </if>
+            <if test="updateInvitedTime != null">
+                update_invited_time,
+            </if>
+            <if test="legalMemberId != null">
+                legal_member_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="memberId != null">
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="areaCode != null">
+                #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="isReal != null">
+                #{isReal,jdbcType=BIT},
+            </if>
+            <if test="password != null">
+                #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="dealPassword != null">
+                #{dealPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarImage != null">
+                #{avatarImage,jdbcType=VARCHAR},
+            </if>
+            <if test="accountStatus != null">
+                #{accountStatus,jdbcType=BIT},
+            </if>
+            <if test="memberLevel != null">
+                #{memberLevel,jdbcType=INTEGER},
+            </if>
+            <if test="invitationCode != null">
+                #{invitationCode,jdbcType=INTEGER},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=INTEGER},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="invitedBy != null">
+                #{invitedBy,jdbcType=INTEGER},
+            </if>
+            <if test="invitedTime != null">
+                #{invitedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="oldInvitedBy != null">
+                #{oldInvitedBy,jdbcType=INTEGER},
+            </if>
+            <if test="updateInvitedDesc != null">
+                #{updateInvitedDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="updateInvitedTime != null">
+                #{updateInvitedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="legalMemberId != null">
+                #{legalMemberId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.DMember">
+        update d_member
+        <set>
+            <if test="areaCode != null">
+                area_code = #{areaCode,jdbcType=VARCHAR},
+            </if>
+            <if test="mobile != null">
+                mobile = #{mobile,jdbcType=VARCHAR},
+            </if>
+            <if test="nickName != null">
+                nick_name = #{nickName,jdbcType=VARCHAR},
+            </if>
+            <if test="isReal != null">
+                is_real = #{isReal,jdbcType=BIT},
+            </if>
+            <if test="password != null">
+                password = #{password,jdbcType=VARCHAR},
+            </if>
+            <if test="dealPassword != null">
+                deal_password = #{dealPassword,jdbcType=VARCHAR},
+            </if>
+            <if test="token != null">
+                token = #{token,jdbcType=VARCHAR},
+            </if>
+            <if test="avatarImage != null">
+                avatar_image = #{avatarImage,jdbcType=VARCHAR},
+            </if>
+            <if test="accountStatus != null">
+                account_status = #{accountStatus,jdbcType=BIT},
+            </if>
+            <if test="memberLevel != null">
+                member_level = #{memberLevel,jdbcType=INTEGER},
+            </if>
+            <if test="invitationCode != null">
+                invitation_code = #{invitationCode,jdbcType=INTEGER},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=INTEGER},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy,jdbcType=INTEGER},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="invitedBy != null">
+                invited_by = #{invitedBy,jdbcType=INTEGER},
+            </if>
+            <if test="invitedTime != null">
+                invited_time = #{invitedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="oldInvitedBy != null">
+                old_invited_by = #{oldInvitedBy,jdbcType=INTEGER},
+            </if>
+            <if test="updateInvitedDesc != null">
+                update_invited_desc = #{updateInvitedDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="updateInvitedTime != null">
+                update_invited_time = #{updateInvitedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="legalMemberId != null">
+                legal_member_id = #{legalMemberId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where member_id = #{memberId,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.DMember">
+    update d_member
+    set area_code = #{areaCode,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      is_real = #{isReal,jdbcType=BIT},
+      password = #{password,jdbcType=VARCHAR},
+      deal_password = #{dealPassword,jdbcType=VARCHAR},
+      token = #{token,jdbcType=VARCHAR},
+      avatar_image = #{avatarImage,jdbcType=VARCHAR},
+      account_status = #{accountStatus,jdbcType=BIT},
+      member_level = #{memberLevel,jdbcType=INTEGER},
+      invitation_code = #{invitationCode,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=INTEGER},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      invited_by = #{invitedBy,jdbcType=INTEGER},
+      invited_time = #{invitedTime,jdbcType=TIMESTAMP},
+      old_invited_by = #{oldInvitedBy,jdbcType=INTEGER},
+      update_invited_desc = #{updateInvitedDesc,jdbcType=VARCHAR},
+      update_invited_time = #{updateInvitedTime,jdbcType=TIMESTAMP},
+      legal_member_id = #{legalMemberId,jdbcType=INTEGER}
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+
+
+
+
+
+  <select id="selectByMobile" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from d_member
+    where mobile = #{mobile} and area_code = #{areaCode}
+  </select>
+
+</mapper>

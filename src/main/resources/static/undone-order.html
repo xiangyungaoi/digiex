@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="img/favicon.ico" />
+		<meta http-equiv="X-UA-Compatible" content="IE=8">
+		<meta http-equiv="Cache" content="no-cache">
+		<meta http-equiv="Pragma" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-cache"/>
+		<meta http-equiv="Expires" content="0">
+
+
+
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<title>未完成订单</title>
+	</head>
+	<body>
+		<div class="paddingA30">
+			<div class="tab-list clearfix margB30" id="js-ai-name">
+				<!--<div class="fl tab cursor text-center bRN active">AI一号</div>
+				<div class="fl tab cursor text-center bRN">AI二号</div>
+				<div class="fl tab cursor text-center bRN">AI三号</div>
+				<div class="fl tab cursor text-center">AI四号</div>-->
+			</div>
+			<div class="tab-main">
+				<div class="tab-cont">
+					<div class="table margB40">
+						<table>
+							<thead>
+								<tr>
+									<th style="width: 20%;">订单编号</th>
+									<th style="width: 20%;">截止时间</th>
+									<th style="width: 20%;">总手数</th>
+									<th style="width: 20%;">总金额</th>
+									<th style="width: 20%;">操作</th>
+								</tr>
+							</thead>
+							<tbody id="incomplete-orders"></tbody>
+							<!--<tbody>
+								<tr>
+									<td>201901051254855963</td>
+									<td>2019-01-05 12：00：00</td>
+									<td>5.6</td>
+									<td>$5674</td>
+									<td>
+										<a href="undone-details.html"><span class="paddingLR15 size12px c1f88ff cursor">详情</span></a>
+										<span class="paddingLR15 size12px c1f88ff cursor js-down-order">下单</span>
+									</td>
+								</tr>
+							</tbody>-->
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!--下单-->
+		<script type="text/html" id="down-order-main">
+			<div class="layer-box">
+				<ul class="">
+					<li class="margB15">
+						<label for="" class="label-b">总手数：</label>
+						<span class="size14px c222222 js-total-hands"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总金额：</label>
+						<span class="size14px c222222 js-total-fee"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">方向：</label>
+						<select class="sbox width100px size14px c293645 status" id="direction">
+							<option value="">请选择</option>
+							<option value="0">买入</option>
+							<option value="1">卖出</option>
+						</select>
+					</li>
+
+					<li class="margB15">
+						<label for="" class="label-b">币种：</label>
+						<input type="text" class="input" name="currency"/>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓时间：</label>
+						<input type="text" class="input" id="buyTime" name="buyTime"/>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓点数：</label>
+						<input type="text" class="input" name="buyPrice"/>
+					</li>
+					<li class="margB36">
+						<label for="" class="label-b">建仓手续费：</label>
+						<input type="text" class="input" name="buyServiceFee"/><span class="size14px c222222 margL5">$</span>
+					</li>
+				</ul>
+				<div class="layerBtn clearfix margL115">
+					<button class="fl but bffa10a cffffff margR20 bff8a3b js-buy-sure">确定</button>
+					<button class="fr but bffffff bA cb5b7bc  layui-layer-close">取消</button>
+				</div>
+			</div>
+		</script>
+	</body>
+	<script type="text/html" id="js-ai-name-list">
+		<%for(var i in data){%>
+		<div class="fl tab cursor text-center bRN" data-id="<%=data[i].id%>" data-name="<%=data[i].name%>"><%=data[i].name%></div>
+		<%}%>
+	</script>
+
+	<script type="text/html" id="incomplete-orders-list">
+		<%for(var i in data){%>
+		<tr>
+			<td><%=data[i].orderId%></td>
+			<td><%=data[i].cutoff%></td>
+			<td><%=data[i].totalStandardHands%></td>
+			<td><%=data[i].totalFee%>$</td>
+			<td>
+				<a data-id="<%=data[i].orderId%>" data-cutoff="<%=data[i].cutoff%>" data-hands="<%=data[i].totalStandardHands%>" data-fee="<%=data[i].totalFee%>" href="javascript:void(0)" class="js-undone-order-detail"><span class="paddingLR15 size12px c1f88ff cursor">详情</span></a>
+				<span data-fee="<%=data[i].totalFee%>" data-hands="<%=data[i].totalStandardHands%>" class="paddingLR15 size12px c1f88ff cursor js-down-order" id="js-down-order">下单</span>
+			</td>
+		</tr>
+		<%}%>
+</script>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/style.js"></script>
+	<script type="text/javascript" src="utils/template.js"></script>
+	<script type="text/javascript" src="js/laydate/laydate.js"></script>
+	<script type="text/javascript" src="utils/data.js"></script>
+	<script type="text/javascript" src="utils/utils.js"></script>
+	<script type="text/javascript" src="ps/common.js"></script>
+	<script type="text/javascript" src="js/layer/layer.js"></script>
+	<script type="text/javascript" src="ps/undone-order.js"></script>
+</html>

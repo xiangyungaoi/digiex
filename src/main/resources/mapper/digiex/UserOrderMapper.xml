@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.UserOrderMapper">
+    <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.UserOrder">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="ai_robot_id" jdbcType="BIGINT" property="aiRobotId" />
+        <result column="type" jdbcType="VARCHAR" property="type" />
+        <result column="sell_type" jdbcType="VARCHAR" property="sellType" />
+        <result column="member_id" jdbcType="INTEGER" property="memberId" />
+        <result column="standard_hands" jdbcType="DECIMAL" property="standardHands" />
+        <result column="petty_cash" jdbcType="DECIMAL" property="pettyCash" />
+        <result column="fee" jdbcType="DECIMAL" property="fee" />
+        <result column="buy_service_fee" jdbcType="DECIMAL" property="buyServiceFee" />
+        <result column="inventory_fee" jdbcType="DECIMAL" property="inventoryFee" />
+        <result column="sell_service_fee" jdbcType="DECIMAL" property="sellServiceFee" />
+        <result column="earnings" jdbcType="DECIMAL" property="earnings" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+        <result column="buy_time" jdbcType="TIMESTAMP" property="buyTime" />
+        <result column="sell_time" jdbcType="TIMESTAMP" property="sellTime" />
+        <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime" />
+        <result column="location" jdbcType="VARCHAR" property="location" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, order_id, ai_robot_id, type, sell_type, member_id, standard_hands, petty_cash,
+        fee, buy_service_fee, inventory_fee, sell_service_fee, earnings, status, is_deleted,
+        created_time, buy_time, sell_time, cancel_time, location
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from user_order
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from user_order
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.caetp.digiex.entity.UserOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into user_order (id, order_id, ai_robot_id,
+        type, sell_type, member_id,
+        standard_hands, petty_cash, fee,
+        buy_service_fee, inventory_fee, sell_service_fee,
+        earnings, status, is_deleted,
+        created_time, buy_time, sell_time,
+        cancel_time, location)
+        values (#{id,jdbcType=BIGINT}, #{orderId,jdbcType=VARCHAR}, #{aiRobotId,jdbcType=BIGINT},
+        #{type,jdbcType=VARCHAR}, #{sellType,jdbcType=VARCHAR}, #{memberId,jdbcType=INTEGER},
+        #{standardHands,jdbcType=DECIMAL}, #{pettyCash,jdbcType=DECIMAL}, #{fee,jdbcType=DECIMAL},
+        #{buyServiceFee,jdbcType=DECIMAL}, #{inventoryFee,jdbcType=DECIMAL}, #{sellServiceFee,jdbcType=DECIMAL},
+        #{earnings,jdbcType=DECIMAL}, #{status,jdbcType=INTEGER}, #{isDeleted,jdbcType=BIT},
+        #{createdTime,jdbcType=TIMESTAMP}, #{buyTime,jdbcType=TIMESTAMP}, #{sellTime,jdbcType=TIMESTAMP},
+        #{cancelTime,jdbcType=TIMESTAMP}, #{location,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.caetp.digiex.entity.UserOrder" useGeneratedKeys="true" keyProperty="id">
+        insert into user_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="aiRobotId != null">
+                ai_robot_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="sellType != null">
+                sell_type,
+            </if>
+            <if test="memberId != null">
+                member_id,
+            </if>
+            <if test="standardHands != null">
+                standard_hands,
+            </if>
+            <if test="pettyCash != null">
+                petty_cash,
+            </if>
+            <if test="fee != null">
+                fee,
+            </if>
+            <if test="buyServiceFee != null">
+                buy_service_fee,
+            </if>
+            <if test="inventoryFee != null">
+                inventory_fee,
+            </if>
+            <if test="sellServiceFee != null">
+                sell_service_fee,
+            </if>
+            <if test="earnings != null">
+                earnings,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="buyTime != null">
+                buy_time,
+            </if>
+            <if test="sellTime != null">
+                sell_time,
+            </if>
+            <if test="cancelTime != null">
+                cancel_time,
+            </if>
+            <if test="location != null">
+                location,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="orderId != null">
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="aiRobotId != null">
+                #{aiRobotId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sellType != null">
+                #{sellType,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="standardHands != null">
+                #{standardHands,jdbcType=DECIMAL},
+            </if>
+            <if test="pettyCash != null">
+                #{pettyCash,jdbcType=DECIMAL},
+            </if>
+            <if test="fee != null">
+                #{fee,jdbcType=DECIMAL},
+            </if>
+            <if test="buyServiceFee != null">
+                #{buyServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="inventoryFee != null">
+                #{inventoryFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sellServiceFee != null">
+                #{sellServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="earnings != null">
+                #{earnings,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=BIT},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="buyTime != null">
+                #{buyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sellTime != null">
+                #{sellTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cancelTime != null">
+                #{cancelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="location != null">
+                #{location,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.UserOrder">
+        update user_order
+        <set>
+            <if test="orderId != null">
+                order_id = #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="aiRobotId != null">
+                ai_robot_id = #{aiRobotId,jdbcType=BIGINT},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="sellType != null">
+                sell_type = #{sellType,jdbcType=VARCHAR},
+            </if>
+            <if test="memberId != null">
+                member_id = #{memberId,jdbcType=INTEGER},
+            </if>
+            <if test="standardHands != null">
+                standard_hands = #{standardHands,jdbcType=DECIMAL},
+            </if>
+            <if test="pettyCash != null">
+                petty_cash = #{pettyCash,jdbcType=DECIMAL},
+            </if>
+            <if test="fee != null">
+                fee = #{fee,jdbcType=DECIMAL},
+            </if>
+            <if test="buyServiceFee != null">
+                buy_service_fee = #{buyServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="inventoryFee != null">
+                inventory_fee = #{inventoryFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sellServiceFee != null">
+                sell_service_fee = #{sellServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="earnings != null">
+                earnings = #{earnings,jdbcType=DECIMAL},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=BIT},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="buyTime != null">
+                buy_time = #{buyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sellTime != null">
+                sell_time = #{sellTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="cancelTime != null">
+                cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="location != null">
+                location = #{location,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.UserOrder">
+    update user_order
+    set order_id = #{orderId,jdbcType=VARCHAR},
+      ai_robot_id = #{aiRobotId,jdbcType=BIGINT},
+      type = #{type,jdbcType=VARCHAR},
+      sell_type = #{sellType,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=INTEGER},
+      standard_hands = #{standardHands,jdbcType=DECIMAL},
+      petty_cash = #{pettyCash,jdbcType=DECIMAL},
+      fee = #{fee,jdbcType=DECIMAL},
+      buy_service_fee = #{buyServiceFee,jdbcType=DECIMAL},
+      inventory_fee = #{inventoryFee,jdbcType=DECIMAL},
+      sell_service_fee = #{sellServiceFee,jdbcType=DECIMAL},
+      earnings = #{earnings,jdbcType=DECIMAL},
+      status = #{status,jdbcType=INTEGER},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      buy_time = #{buyTime,jdbcType=TIMESTAMP},
+      sell_time = #{sellTime,jdbcType=TIMESTAMP},
+      cancel_time = #{cancelTime,jdbcType=TIMESTAMP},
+      location = #{location,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="userOrderBuyList" resultType="com.caetp.digiex.dto.api.UserOrderListDTO">
+    SELECT u.id, u.standard_hands standardHands, u.earnings profit, u.status, a.name aiRobotName, a.ai_type aiType, u.fee
+    FROM user_order u
+    LEFT JOIN ai_robot a on u.ai_robot_id = a.id
+    WHERE u.member_id = #{memberId} AND u.status in (0, 1, 2)  AND u.is_deleted = 0
+    ORDER BY u.status ASC, u.created_time DESC
+  </select>
+
+  <select id="userOrderDetail" resultType="com.caetp.digiex.dto.api.UserOrderDetailDTO">
+   SELECT u.id, a.name aiRobotName, u.order_id orderId, u.sell_type sellType, u.standard_hands standardHands,
+   u.fee, (u.buy_service_fee + u.sell_service_fee) serviceFee, u.inventory_fee inventoryFee, u.earnings profit,
+   u.status, u.buy_time buyTime, u.sell_time sellTime, u.cancel_time cancelTime, u.petty_cash pettyCash
+   FROM user_order u
+   LEFT JOIN ai_robot a ON u.ai_robot_id = a.id
+   WHERE u.id = #{id} AND u.member_id = #{memberId} AND u.is_deleted = 0
+  </select>
+
+  <select id="userOrderSellList" resultType="com.caetp.digiex.dto.api.UserOrderListDTO">
+   SELECT u.id, u.standard_hands standardHands, u.earnings profit, u.status, a.name aiRobotName, a.ai_type aiType, u.fee
+    FROM user_order u
+    LEFT JOIN ai_robot a on u.ai_robot_id = a.id
+   WHERE u.member_id = #{memberId} AND u.status in (3, 4)  AND u.is_deleted = 0
+   ORDER BY u.status ASC, u.created_time DESC
+  </select>
+
+  <update id="deleteUserOrderSell">
+  	UPDATE user_order
+  	SET is_deleted = 1
+  	WHERE id = #{id} AND member_id = #{memberId} AND status in (3, 4)  AND is_deleted = 0
+  </update>
+
+  <update id="cancelUserOrder">
+    UPDATE user_order
+    SET status = 4,
+    cancel_time = NOW()
+    WHERE id = #{id} AND member_id = #{memberId} AND status = 0 AND is_deleted = 0
+  </update>
+
+  <select id="orderCount" resultType="com.caetp.digiex.dto.api.UserOrderInfoCountDTO">
+    SELECT 0.0 depositRate, 0.0 availableDeposit,
+    IFNULL ((SELECT SUM(petty_cash) FROM user_order
+      WHERE member_id = #{memberId} AND STATUS IN (0, 1, 2) AND is_deleted = 0), 0.0) usedDeposit,
+    IFNULL ((SELECT SUM(fee) FROM user_order
+      WHERE member_id = #{memberId} AND STATUS IN (1, 2, 3) AND is_deleted = 0), 0.0) totalFee,
+    IFNULL((SELECT SUM(earnings) FROM user_order
+      WHERE member_id = #{memberId} AND STATUS IN (1, 2) AND is_deleted = 0), 0.0) floatProfitLoss,
+    IFNULL((SELECT SUM(earnings) FROM user_order
+      WHERE member_id = #{memberId} AND STATUS = 3 AND is_deleted = 0), 0.0) closedIncome
+  </select>
+
+  <update id="userOrderToBuy">
+    update user_order
+    SET buy_service_fee = #{buyServiceFee},
+      status = 1,
+      buy_time = #{buyTime}
+    where id = #{id} AND status = 0
+  </update>
+
+  <update id="sellUserOrder">
+    update user_order
+    SET status = 2,
+      sell_type = 'user'
+    where id = #{id} AND member_id = #{memberId} AND status = 1 AND is_deleted = 0
+  </update>
+
+  <select id="orderCountByMemberId" resultType="Long">
+    SELECT count(1)
+    FROM user_order
+    WHERE member_id = #{memberId}
+  </select>
+
+   <select id="userHistoryOrdre" resultType="com.caetp.digiex.entity.UserOrder" parameterType="integer">
+     SELECT uo.id id, uo.`ai_robot_id` aiRobotId, uo.standard_hands standardHands, uo.`status` status,
+     uo.earnings earnings, uo.cancel_time cancelTime, uo.termination_order_time terminationOrderTime
+     FROM user_order uo
+     WHERE uo.member_id =#{memberId} AND  uo.`status` =3 OR uo.`status` = 4;
+   </select>
+
+</mapper>

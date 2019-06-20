@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.rmsmapper.DMemberAccountDetailsMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.DMemberAccountDetails">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="link_id" jdbcType="VARCHAR" property="linkId" />
+    <result column="account_type" jdbcType="VARCHAR" property="accountType" />
+    <result column="amount" jdbcType="DECIMAL" property="amount" />
+    <result column="details_type" jdbcType="VARCHAR" property="detailsType" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, member_id, link_id, account_type, amount, details_type, created_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from d_member_account_details
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from d_member_account_details
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.DMemberAccountDetails">
+    insert into d_member_account_details (id, member_id, link_id, 
+      account_type, amount, details_type, 
+      created_time)
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=INTEGER}, #{linkId,jdbcType=VARCHAR}, 
+      #{accountType,jdbcType=VARCHAR}, #{amount,jdbcType=DECIMAL}, #{detailsType,jdbcType=VARCHAR}, 
+      #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.DMemberAccountDetails">
+    insert into d_member_account_details
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="linkId != null">
+        link_id,
+      </if>
+      <if test="accountType != null">
+        account_type,
+      </if>
+      <if test="amount != null">
+        amount,
+      </if>
+      <if test="detailsType != null">
+        details_type,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="linkId != null">
+        #{linkId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="detailsType != null">
+        #{detailsType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.DMemberAccountDetails">
+    update d_member_account_details
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="linkId != null">
+        link_id = #{linkId,jdbcType=VARCHAR},
+      </if>
+      <if test="accountType != null">
+        account_type = #{accountType,jdbcType=VARCHAR},
+      </if>
+      <if test="amount != null">
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="detailsType != null">
+        details_type = #{detailsType,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.DMemberAccountDetails">
+    update d_member_account_details
+    set member_id = #{memberId,jdbcType=INTEGER},
+      link_id = #{linkId,jdbcType=VARCHAR},
+      account_type = #{accountType,jdbcType=VARCHAR},
+      amount = #{amount,jdbcType=DECIMAL},
+      details_type = #{detailsType,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

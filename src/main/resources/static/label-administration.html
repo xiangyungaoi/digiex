@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>标签管理</title>
+        <link rel="shortcut icon" href="img/favicon.ico" />
+        <link rel="stylesheet" href="css/reset.css" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <div class="js-user">
+
+        </div>
+        <section>
+            <div class="paddingA30">
+                <div class="m-btn js-add text-center cursor size18px cffffff" data-type="add">+新增</div>
+                <div class="table margB40">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th style="width: 20%;">序号</th>
+                            <th style="width: 20%;">标签名称</th>
+                            <th style="width: 20%;">操作</th>
+                        </tr>
+                        </thead>
+
+                        <tbody id="label-info"></tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+        <div class="index">1</div>
+    </body>
+    <!--新增-->
+    <script type="text/html" id="add-main">
+        <div class="layer-box">
+            <ul class="">
+                <li class="margB15">
+                    <label for="" class="label-b">标签名称：</label>
+                    <input type="text" maxlength="6" placeholder="最多输入6个字符" name="label-name" class="input" />
+                </li>
+            </ul>
+            <div class="layerBtn clearfix margL115">
+                <button class="fl but bffa10a cffffff margR20 bff8a3b js-sure">确定</button>
+                <button class="fr but bffffff bA cb5b7bc  layui-layer-close js-cancel">取消</button>
+            </div>
+        </div>
+    </script>
+
+    <!--删除-->
+    <script type="text/html" id="delete-main">
+        <div class="layer-box" style="height: 100px">
+            <div class="size15px c000f38 margB40">确定要删除“<span id="delete-label-feature"></span>”吗？</div>
+            <div class="layerBtn clearfix">
+                <button class="fl but bffa10a cffffff margR20 bff8a3b js-delete-sure">确定</button>
+                <button class="fr but bffffff bA c8f9cae layui-layer-close">取消</button>
+            </div>
+        </div>
+    </script>
+
+    <!--列表渲染-->
+    <script type="text/html" id="label-info-list">
+        <%for(var i in data){%>
+        <tr>
+            <td><%=data[i].id%></td>
+            <td><%=data[i].feature%></td>
+            <td>
+                <span data-id="<%=data[i].id%>" data-feature="<%=data[i].feature%>" class="paddingLR15 size12px c1f88ff cursor js-delete-label">删除</span>
+            </td>
+        </tr>
+        <%}%>
+    </script>
+    <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="js/style.js"></script>
+    <script type="text/javascript" src="utils/template.js"></script>
+    <script type="text/javascript" src="utils/data.js"></script>
+    <script type="text/javascript" src="utils/utils.js"></script>
+    <script type="text/javascript" src="js/layer/layer.js"></script>
+    <script type="text/javascript" src="ps/label-management.js"></script>
+</html>

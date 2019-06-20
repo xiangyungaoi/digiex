@@ -1,0 +1,71 @@
+<div class="clearfix">
+    <div class="fr user-info">
+        <div class="inline-block size16px c293645 name margR8 user-info-name">Adrienne</div>
+        <!--<div class="inline-block size14px cb5bdc4 role">（超级管理员）</div>-->
+        <div class="inline-block margL10 hBtn radius2 js-SignOut cursor">退出</div>
+
+    </div>
+</div>
+<header class="js-head">
+    <div class="header bB">
+        <ul class="clearfix nav">
+            <li class="fl nav-list">
+                <a class="inline-block margR20 cffffff size22px " href="index.html">AI管理</a>
+            </li>
+            <li class="fl nav-list">
+                <a class="inline-block margR20 cffffff  size22px" href="label-administration.html">标签管理</a>
+            </li>
+            <li class="fl nav-list">
+                <a class="inline-block cffffff  size22px" href="order-administration.html">订单管理</a>
+            </li>
+        </ul>
+    </div>
+</header>
+<script type="text/html" id="signout-main">
+    <div class="layer-box">
+        <div class="size15px c293645 margB30">确定要退出登录吗？</div>
+
+        <div class="layerBtn clearfix">
+            <button class="fl but bffa10a cffffff margR20 bff8a3b confBtn">确定</button>
+            <button class="fr but bffffff bA cb5b7bc  layui-layer-close">取消</button>
+        </div>
+
+    </div>
+</script>
+<script >
+    $(function () {
+        $(".nav .nav-list").eq($(".index").html()).addClass("active").siblings().removeClass("active");
+
+
+        userInfo();
+        $(".js-SignOut").on("click",function(){
+            layer.open({
+                title:'提示',
+                area:["400px","259px"],
+                btn:false,
+                move:false,
+                skin:"Height171",
+                content:template("signout-main",{}),
+                success:function (lay, ind) {
+                    //退出
+                    lay.find(".confBtn").on("click",function () {
+                        doRequestwithnoheader({},"get",urlData.logout,function(res){
+                            helper.setCookie("TOKEN","");
+                            layer.msg("退出成功",{offset:['30%',"40%"]});
+                            window.location.href = basePath + "/login.html";
+                        },function(res){});
+                    })
+                }
+            });
+        });
+    });
+
+    /**
+     * 用户信息
+     */
+   function userInfo() {
+        doRequestwithnoheader({},"get",urlData.userDetail,function(res){
+            $(".user-info-name").html(res.data.name);
+        },function(res){},"application/json");
+   }
+</script>

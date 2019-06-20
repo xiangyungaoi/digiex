@@ -1,0 +1,24 @@
+var urlData = {
+    aiRobotList:"/cms/aiRobot/aiRobotInfo",//查询ai管理列表
+    addAiRobot:"/cms/aiRobot/addAiRobot",//新增机器人
+    viewRobotInfo:"/cms/aiRobot/aiRobotView",//查询机器人信息
+    delAiRobot:"/cms/aiRobot/delAiRobot",//删除机器人
+    modifyRobotInfo:"/cms/aiRobot/modifyRobotView",//更新机器人信息
+    queryRobotInfo:"/cms/aiRobot/RobotByName",//查询机器人名称
+    selectMt5ByBuy:"/cms/aiRobot/selectMt5PositionList",//查询mt5持仓订单
+    selectMt5BySell:"/cms/aiRobot/selectMt5EveningUpList",//查询MT5平仓订单
+    selectMt5ByUndone:"/cms/aiRobot/selectMt5UndoneList",//查询MT5未完成订单
+    selectMt5ByUndoneInfoView:"/cms/aiRobot/selectMt5ByUndoneInfoView",//查询MT5未完成订单用户列表
+    updateMt5UndoneOrder:"/cms/aiRobot/updateMt5UndoneOrder",//建仓
+    mt5OrderDetail:"/cms/aiRobot/mt5OrderDetail",//MT5持仓或者平仓订单详情
+    userOrdersByMT5OrderId:"/cms/aiRobot/userOrdersByMT5OrderId",//MT5持仓或者平仓订单详情
+    updateMt5OrderAndPosition:"/cms/aiRobot/updateMt5OrderAndPosition",//MT5持仓或者平仓订单详情
+    uploadFile:"/cms/common/upload",//上传文件
+    login:"/cms/user/login",//登录
+    logout:"/cms/user/login/logout",//注销登陆
+    userDetail:"/cms/user/userDetail",//用户信息
+    /*标签管理*/
+    labelList:"/cms/aiFeature/list",//标签列表
+    deleteLabelById:"/cms/aiFeature/delete",//删除标签
+    addLabel:"/cms/aiFeature/add",//添加标签
+};

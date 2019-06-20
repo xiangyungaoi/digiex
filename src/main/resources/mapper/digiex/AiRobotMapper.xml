@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.AiRobotMapper">
+    <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.AiRobot">
+        <id column="id" jdbcType="BIGINT" property="id" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="leverage_times" jdbcType="INTEGER" property="leverageTimes" />
+        <result column="deposit_rate" jdbcType="INTEGER" property="depositRate" />
+        <result column="fee_rate" jdbcType="INTEGER" property="feeRate" />
+        <result column="stop_loss_limit" jdbcType="DECIMAL" property="stopLossLimit" />
+        <result column="features" jdbcType="VARCHAR" property="features" />
+        <result column="ai_type" jdbcType="VARCHAR" property="aiType" />
+        <result column="ai_type_name" jdbcType="VARCHAR" property="aiTypeName" />
+        <result column="accuracy_rate" jdbcType="DECIMAL" property="accuracyRate" />
+        <result column="profit_orders" jdbcType="INTEGER" property="profitOrders" />
+        <result column="loss_orders" jdbcType="INTEGER" property="lossOrders" />
+        <result column="sell_earnings" jdbcType="DECIMAL" property="sellEarnings" />
+        <result column="monthly_profit_rate" jdbcType="DECIMAL" property="monthlyProfitRate" />
+        <result column="max_profit" jdbcType="DECIMAL" property="maxProfit" />
+        <result column="max_loss" jdbcType="DECIMAL" property="maxLoss" />
+        <result column="total_transactions" jdbcType="INTEGER" property="totalTransactions" />
+        <result column="max_standard_hands" jdbcType="DECIMAL" property="maxStandardHands" />
+        <result column="average_profit" jdbcType="DECIMAL" property="averageProfit" />
+        <result column="is_activated" jdbcType="BIT" property="isActivated" />
+        <result column="is_deleted" jdbcType="BIT" property="isDeleted" />
+        <result column="agreement_name" jdbcType="VARCHAR" property="agreementName" />
+        <result column="agreement_url" jdbcType="VARCHAR" property="agreementUrl" />
+        <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+        <result column="updated_by" jdbcType="BIGINT" property="updatedBy" />
+        <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, name, leverage_times, deposit_rate, fee_rate, stop_loss_limit, features, ai_type,
+        ai_type_name, accuracy_rate, profit_orders, loss_orders, sell_earnings, monthly_profit_rate,
+        max_profit, max_loss, total_transactions, max_standard_hands, average_profit, is_activated,
+        is_deleted, agreement_name, agreement_url, created_by, created_time, updated_by,
+        updated_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from ai_robot
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from ai_robot
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.caetp.digiex.entity.AiRobot">
+        insert into ai_robot (id, name, leverage_times,
+        deposit_rate, fee_rate, stop_loss_limit,
+        features, ai_type, ai_type_name,
+        accuracy_rate, profit_orders, loss_orders,
+        sell_earnings, monthly_profit_rate, max_profit,
+        max_loss, total_transactions, max_standard_hands,
+        average_profit, is_activated, is_deleted,
+        agreement_name, agreement_url, created_by,
+        created_time, updated_by, updated_time
+        )
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{leverageTimes,jdbcType=INTEGER},
+        #{depositRate,jdbcType=INTEGER}, #{feeRate,jdbcType=INTEGER}, #{stopLossLimit,jdbcType=DECIMAL},
+        #{features,jdbcType=VARCHAR}, #{aiType,jdbcType=VARCHAR}, #{aiTypeName,jdbcType=VARCHAR},
+        #{accuracyRate,jdbcType=DECIMAL}, #{profitOrders,jdbcType=INTEGER}, #{lossOrders,jdbcType=INTEGER},
+        #{sellEarnings,jdbcType=DECIMAL}, #{monthlyProfitRate,jdbcType=DECIMAL}, #{maxProfit,jdbcType=DECIMAL},
+        #{maxLoss,jdbcType=DECIMAL}, #{totalTransactions,jdbcType=INTEGER}, #{maxStandardHands,jdbcType=DECIMAL},
+        #{averageProfit,jdbcType=DECIMAL}, #{isActivated,jdbcType=BIT}, #{isDeleted,jdbcType=BIT},
+        #{agreementName,jdbcType=VARCHAR}, #{agreementUrl,jdbcType=VARCHAR}, #{createdBy,jdbcType=BIGINT},
+        #{createdTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=BIGINT}, #{updatedTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.caetp.digiex.entity.AiRobot">
+        insert into ai_robot
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="leverageTimes != null">
+                leverage_times,
+            </if>
+            <if test="depositRate != null">
+                deposit_rate,
+            </if>
+            <if test="feeRate != null">
+                fee_rate,
+            </if>
+            <if test="stopLossLimit != null">
+                stop_loss_limit,
+            </if>
+            <if test="features != null">
+                features,
+            </if>
+            <if test="aiType != null">
+                ai_type,
+            </if>
+            <if test="aiTypeName != null">
+                ai_type_name,
+            </if>
+            <if test="accuracyRate != null">
+                accuracy_rate,
+            </if>
+            <if test="profitOrders != null">
+                profit_orders,
+            </if>
+            <if test="lossOrders != null">
+                loss_orders,
+            </if>
+            <if test="sellEarnings != null">
+                sell_earnings,
+            </if>
+            <if test="monthlyProfitRate != null">
+                monthly_profit_rate,
+            </if>
+            <if test="maxProfit != null">
+                max_profit,
+            </if>
+            <if test="maxLoss != null">
+                max_loss,
+            </if>
+            <if test="totalTransactions != null">
+                total_transactions,
+            </if>
+            <if test="maxStandardHands != null">
+                max_standard_hands,
+            </if>
+            <if test="averageProfit != null">
+                average_profit,
+            </if>
+            <if test="isActivated != null">
+                is_activated,
+            </if>
+            <if test="isDeleted != null">
+                is_deleted,
+            </if>
+            <if test="agreementName != null">
+                agreement_name,
+            </if>
+            <if test="agreementUrl != null">
+                agreement_url,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="leverageTimes != null">
+                #{leverageTimes,jdbcType=INTEGER},
+            </if>
+            <if test="depositRate != null">
+                #{depositRate,jdbcType=INTEGER},
+            </if>
+            <if test="feeRate != null">
+                #{feeRate,jdbcType=INTEGER},
+            </if>
+            <if test="stopLossLimit != null">
+                #{stopLossLimit,jdbcType=DECIMAL},
+            </if>
+            <if test="features != null">
+                #{features,jdbcType=VARCHAR},
+            </if>
+            <if test="aiType != null">
+                #{aiType,jdbcType=VARCHAR},
+            </if>
+            <if test="aiTypeName != null">
+                #{aiTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="accuracyRate != null">
+                #{accuracyRate,jdbcType=DECIMAL},
+            </if>
+            <if test="profitOrders != null">
+                #{profitOrders,jdbcType=INTEGER},
+            </if>
+            <if test="lossOrders != null">
+                #{lossOrders,jdbcType=INTEGER},
+            </if>
+            <if test="sellEarnings != null">
+                #{sellEarnings,jdbcType=DECIMAL},
+            </if>
+            <if test="monthlyProfitRate != null">
+                #{monthlyProfitRate,jdbcType=DECIMAL},
+            </if>
+            <if test="maxProfit != null">
+                #{maxProfit,jdbcType=DECIMAL},
+            </if>
+            <if test="maxLoss != null">
+                #{maxLoss,jdbcType=DECIMAL},
+            </if>
+            <if test="totalTransactions != null">
+                #{totalTransactions,jdbcType=INTEGER},
+            </if>
+            <if test="maxStandardHands != null">
+                #{maxStandardHands,jdbcType=DECIMAL},
+            </if>
+            <if test="averageProfit != null">
+                #{averageProfit,jdbcType=DECIMAL},
+            </if>
+            <if test="isActivated != null">
+                #{isActivated,jdbcType=BIT},
+            </if>
+            <if test="isDeleted != null">
+                #{isDeleted,jdbcType=BIT},
+            </if>
+            <if test="agreementName != null">
+                #{agreementName,jdbcType=VARCHAR},
+            </if>
+            <if test="agreementUrl != null">
+                #{agreementUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.AiRobot">
+        update ai_robot
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="leverageTimes != null">
+                leverage_times = #{leverageTimes,jdbcType=INTEGER},
+            </if>
+            <if test="depositRate != null">
+                deposit_rate = #{depositRate,jdbcType=INTEGER},
+            </if>
+            <if test="feeRate != null">
+                fee_rate = #{feeRate,jdbcType=INTEGER},
+            </if>
+            <if test="stopLossLimit != null">
+                stop_loss_limit = #{stopLossLimit,jdbcType=DECIMAL},
+            </if>
+            <if test="features != null">
+                features = #{features,jdbcType=VARCHAR},
+            </if>
+            <if test="aiType != null">
+                ai_type = #{aiType,jdbcType=VARCHAR},
+            </if>
+            <if test="aiTypeName != null">
+                ai_type_name = #{aiTypeName,jdbcType=VARCHAR},
+            </if>
+            <if test="accuracyRate != null">
+                accuracy_rate = #{accuracyRate,jdbcType=DECIMAL},
+            </if>
+            <if test="profitOrders != null">
+                profit_orders = #{profitOrders,jdbcType=INTEGER},
+            </if>
+            <if test="lossOrders != null">
+                loss_orders = #{lossOrders,jdbcType=INTEGER},
+            </if>
+            <if test="sellEarnings != null">
+                sell_earnings = #{sellEarnings,jdbcType=DECIMAL},
+            </if>
+            <if test="monthlyProfitRate != null">
+                monthly_profit_rate = #{monthlyProfitRate,jdbcType=DECIMAL},
+            </if>
+            <if test="maxProfit != null">
+                max_profit = #{maxProfit,jdbcType=DECIMAL},
+            </if>
+            <if test="maxLoss != null">
+                max_loss = #{maxLoss,jdbcType=DECIMAL},
+            </if>
+            <if test="totalTransactions != null">
+                total_transactions = #{totalTransactions,jdbcType=INTEGER},
+            </if>
+            <if test="maxStandardHands != null">
+                max_standard_hands = #{maxStandardHands,jdbcType=DECIMAL},
+            </if>
+            <if test="averageProfit != null">
+                average_profit = #{averageProfit,jdbcType=DECIMAL},
+            </if>
+            <if test="isActivated != null">
+                is_activated = #{isActivated,jdbcType=BIT},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted = #{isDeleted,jdbcType=BIT},
+            </if>
+            <if test="agreementName != null">
+                agreement_name = #{agreementName,jdbcType=VARCHAR},
+            </if>
+            <if test="agreementUrl != null">
+                agreement_url = #{agreementUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                updated_by = #{updatedBy,jdbcType=BIGINT},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.AiRobot">
+    update ai_robot
+    set name = #{name,jdbcType=VARCHAR},
+      leverage_times = #{leverageTimes,jdbcType=INTEGER},
+      deposit_rate = #{depositRate,jdbcType=INTEGER},
+      fee_rate = #{feeRate,jdbcType=INTEGER},
+      stop_loss_limit = #{stopLossLimit,jdbcType=DECIMAL},
+      features = #{features,jdbcType=VARCHAR},
+      ai_type = #{aiType,jdbcType=VARCHAR},
+      ai_type_name = #{aiTypeName,jdbcType=VARCHAR},
+      accuracy_rate = #{accuracyRate,jdbcType=DECIMAL},
+      profit_orders = #{profitOrders,jdbcType=INTEGER},
+      loss_orders = #{lossOrders,jdbcType=INTEGER},
+      sell_earnings = #{sellEarnings,jdbcType=DECIMAL},
+      monthly_profit_rate = #{monthlyProfitRate,jdbcType=DECIMAL},
+      max_profit = #{maxProfit,jdbcType=DECIMAL},
+      max_loss = #{maxLoss,jdbcType=DECIMAL},
+      total_transactions = #{totalTransactions,jdbcType=INTEGER},
+      max_standard_hands = #{maxStandardHands,jdbcType=DECIMAL},
+      average_profit = #{averageProfit,jdbcType=DECIMAL},
+      is_activated = #{isActivated,jdbcType=BIT},
+      is_deleted = #{isDeleted,jdbcType=BIT},
+      agreement_name = #{agreementName,jdbcType=VARCHAR},
+      agreement_url = #{agreementUrl,jdbcType=VARCHAR},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=BIGINT},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+  <select id="aiRobotList" resultType="com.caetp.digiex.dto.api.AiRobotListDTO">
+    SELECT id, name, ai_type aiType, accuracy_rate accuracyRate, sell_earnings sellEarnings, features
+    from ai_robot
+    where is_activated = 1 and is_deleted = 0 order by created_time desc
+  </select>
+
+  <select id="aiRobotDetail" resultType="com.caetp.digiex.dto.api.AiRobotDetailDTO">
+    SELECT id, name, ai_type aiType, accuracy_rate accuracyRate, profit_orders profitOrders, loss_orders lossOrders,
+     sell_earnings sellEarnings, monthly_profit_rate monthlyProfitRate, max_profit maxProfit, max_loss maxLoss,
+     total_transactions totalTransactions, max_standard_hands maxStandardHands, average_profit averageProfit,
+     agreement_name agreementName, agreement_url agreementUrl, features, leverage_times leverageTimes,
+     deposit_rate depositRate, fee_rate feeRate
+    from ai_robot
+    where id = #{id} and is_activated = 1 and is_deleted = 0
+  </select>
+
+    <select id="aiRobotView" resultType="com.caetp.digiex.dto.cms.AiRobotCmsDto">
+    select id,name,ai_type aiType,agreement_name agreementName,ai_type_name aiTypeName, agreement_url agreementUrl,
+     is_activated isActivated, features, leverage_times leverageTimes, deposit_rate depositRate, fee_rate feeRate,
+     stop_loss_limit * 100 stopLossLimit
+    from ai_robot
+    where id=#{id}
+  </select>
+
+    <select id="aiRobotByName" resultType="com.caetp.digiex.dto.cms.AIRobotCmsNameDTO">
+        select id,name from ai_robot where is_deleted=0
+    </select>
+
+    <select id="selectByList" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM ai_robot
+        WHERE is_deleted = 0 order by created_time desc
+    </select>
+    <!--查询用户订单是否有机器人-->
+    <select id="aiRobtCount" resultType="int">
+        SELECT COUNT(0) FROM user_order u WHERE u.`ai_robot_id`=#{id}
+    </select>
+
+    <select id="getAiName" parameterType="long" resultType="string">
+        select ar.name
+        FROM ai_robot ar
+        WHERE id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.UserMt5OrderParameterMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.UserMt5OrderParameter">
+    <id column="order" jdbcType="INTEGER" property="order" />
+    <result column="reqid" jdbcType="VARCHAR" property="reqid" />
+    <result column="login" jdbcType="INTEGER" property="login" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="trade_type" jdbcType="INTEGER" property="tradeType" />
+    <result column="tradecmd" jdbcType="INTEGER" property="tradecmd" />
+    <result column="price" jdbcType="DECIMAL" property="price" />
+    <result column="spread" jdbcType="DOUBLE" property="spread" />
+    <result column="initial_volume" jdbcType="DOUBLE" property="initialVolume" />
+    <result column="fill_policy" jdbcType="INTEGER" property="fillPolicy" />
+    <result column="expiration" jdbcType="INTEGER" property="expiration" />
+    <result column="expiration_dat" jdbcType="TIMESTAMP" property="expirationDat" />
+    <result column="sl" jdbcType="DECIMAL" property="sl" />
+    <result column="tp" jdbcType="DECIMAL" property="tp" />
+    <result column="orderby" jdbcType="VARCHAR" property="orderby" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="leverage" jdbcType="INTEGER" property="leverage" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `order`, reqid, login, symbol, trade_type, tradecmd, price, spread, initial_volume,
+    fill_policy, expiration, expiration_dat, sl, tp, orderby, `comment`, leverage
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_mt5_order_parameter
+    where `order` = #{order,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_mt5_order_parameter
+    where order = #{order,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.UserMt5OrderParameter">
+    insert into user_mt5_order_parameter (order, reqid, login,
+      symbol, trade_type, tradecmd, 
+      price, spread, initial_volume, 
+      fill_policy, expiration, expiration_dat, 
+      sl, tp, orderby, comment, 
+      leverage)
+    values (#{order,jdbcType=INTEGER}, #{reqid,jdbcType=VARCHAR}, #{login,jdbcType=INTEGER}, 
+      #{symbol,jdbcType=VARCHAR}, #{tradeType,jdbcType=INTEGER}, #{tradecmd,jdbcType=INTEGER}, 
+      #{price,jdbcType=DECIMAL}, #{spread,jdbcType=DOUBLE}, #{initialVolume,jdbcType=DOUBLE},
+      #{fillPolicy,jdbcType=INTEGER}, #{expiration,jdbcType=INTEGER}, #{expirationDat,jdbcType=TIMESTAMP}, 
+      #{sl,jdbcType=DECIMAL}, #{tp,jdbcType=DECIMAL}, #{orderby,jdbcType=VARCHAR}, #{comment,jdbcType=VARCHAR}, 
+      #{leverage,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.UserMt5OrderParameter">
+    insert into user_mt5_order_parameter
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="order != null">
+        `order`,
+      </if>
+      <if test="reqid != null">
+        reqid,
+      </if>
+      <if test="login != null">
+        login,
+      </if>
+      <if test="symbol != null">
+        symbol,
+      </if>
+      <if test="tradeType != null">
+        trade_type,
+      </if>
+      <if test="tradecmd != null">
+        tradecmd,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="spread != null">
+        spread,
+      </if>
+      <if test="initialVolume != null">
+        initial_volume,
+      </if>
+      <if test="fillPolicy != null">
+        fill_policy,
+      </if>
+      <if test="expiration != null">
+        expiration,
+      </if>
+      <if test="expirationDat != null">
+        expiration_dat,
+      </if>
+      <if test="sl != null">
+        sl,
+      </if>
+      <if test="tp != null">
+        tp,
+      </if>
+      <if test="orderby != null">
+        orderby,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="leverage != null">
+        leverage,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="reqid != null">
+        #{reqid,jdbcType=VARCHAR},
+      </if>
+      <if test="login != null">
+        #{login,jdbcType=INTEGER},
+      </if>
+      <if test="symbol != null">
+        #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="tradecmd != null">
+        #{tradecmd,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="spread != null">
+        #{spread,jdbcType=DOUBLE},
+      </if>
+      <if test="initialVolume != null">
+        #{initialVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="fillPolicy != null">
+        #{fillPolicy,jdbcType=INTEGER},
+      </if>
+      <if test="expiration != null">
+        #{expiration,jdbcType=INTEGER},
+      </if>
+      <if test="expirationDat != null">
+        #{expirationDat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sl != null">
+        #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="tp != null">
+        #{tp,jdbcType=DECIMAL},
+      </if>
+      <if test="orderby != null">
+        #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="leverage != null">
+        #{leverage,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.UserMt5OrderParameter">
+    update user_mt5_order_parameter
+    <set>
+      <if test="reqid != null">
+        reqid = #{reqid,jdbcType=VARCHAR},
+      </if>
+      <if test="login != null">
+        login = #{login,jdbcType=INTEGER},
+      </if>
+      <if test="symbol != null">
+        symbol = #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="tradeType != null">
+        trade_type = #{tradeType,jdbcType=INTEGER},
+      </if>
+      <if test="tradecmd != null">
+        tradecmd = #{tradecmd,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="spread != null">
+        spread = #{spread,jdbcType=DOUBLE},
+      </if>
+      <if test="initialVolume != null">
+        initial_volume = #{initialVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="fillPolicy != null">
+        fill_policy = #{fillPolicy,jdbcType=INTEGER},
+      </if>
+      <if test="expiration != null">
+        expiration = #{expiration,jdbcType=INTEGER},
+      </if>
+      <if test="expirationDat != null">
+        expiration_dat = #{expirationDat,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sl != null">
+        sl = #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="tp != null">
+        tp = #{tp,jdbcType=DECIMAL},
+      </if>
+      <if test="orderby != null">
+        orderby = #{orderby,jdbcType=VARCHAR},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="leverage != null">
+        leverage = #{leverage,jdbcType=INTEGER},
+      </if>
+    </set>
+    where order = #{order,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.UserMt5OrderParameter">
+    update user_mt5_order_parameter
+    set reqid = #{reqid,jdbcType=VARCHAR},
+      login = #{login,jdbcType=INTEGER},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      trade_type = #{tradeType,jdbcType=INTEGER},
+      tradecmd = #{tradecmd,jdbcType=INTEGER},
+      price = #{price,jdbcType=DECIMAL},
+      spread = #{spread,jdbcType=DOUBLE},
+      initial_volume = #{initialVolume,jdbcType=DOUBLE},
+      fill_policy = #{fillPolicy,jdbcType=INTEGER},
+      expiration = #{expiration,jdbcType=INTEGER},
+      expiration_dat = #{expirationDat,jdbcType=TIMESTAMP},
+      sl = #{sl,jdbcType=DECIMAL},
+      tp = #{tp,jdbcType=DECIMAL},
+      orderby = #{orderby,jdbcType=VARCHAR},
+      comment = #{comment,jdbcType=VARCHAR},
+      leverage = #{leverage,jdbcType=INTEGER}
+    where order = #{order,jdbcType=INTEGER}
+  </update>
+
+  <select id="getStarPriceByLogin" resultType="com.caetp.digiex.entity.UserMt5OrderParameter" parameterType="integer">
+    SELECT umop.order `order`, umop.price price
+    FROM user_mt5_order_parameter umop
+    WHERE login = #{login}
+  </select>
+</mapper>

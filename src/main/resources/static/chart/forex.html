@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>外汇列表</title>
+</head>
+<body>
+    <!-- TradingView Widget BEGIN -->
+    <div class="tradingview-widget-container">
+        <div class="tradingview-widget-container__widget"></div>
+        <div class="tradingview-widget-copyright">
+        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-market-overview.js" async>
+            {
+                "showChart": false,
+                "locale": "zh_CN",
+                "largeChartUrl": "http://192.168.1.30:8092/digiex/chart/chart.html",
+                "width": "400",
+                "height": "660",
+                "plotLineColorGrowing": "rgba(33, 150, 243, 1)",
+                "plotLineColorFalling": "rgba(33, 150, 243, 1)",
+                "gridLineColor": "rgba(233, 233, 234, 1)",
+                "scaleFontColor": "rgba(131, 136, 141, 1)",
+                "belowLineFillColorGrowing": "rgba(5, 122, 205, 0.12)",
+                "belowLineFillColorFalling": "rgba(5, 122, 205, 0.12)",
+                "symbolActiveColor": "rgba(225, 239, 249, 1)",
+                "tabs": [
+                {
+                    "title": "外汇",
+                    "symbols": [
+                        {
+                            "s": "FX:EURUSD"
+                        },
+                        {
+                            "s": "FX:GBPUSD"
+                        },
+                        {
+                            "s": "FX:USDJPY"
+                        },
+                        {
+                            "s": "FX:USDCHF"
+                        },
+                        {
+                            "s": "FX:AUDUSD"
+                        },
+                        {
+                            "s": "FX:USDCAD"
+                        },
+                        {
+                            "s": "FX:AUDUSD"
+                        },
+                        {
+                            "s": "FX:EURAUD"
+                        },
+                        {
+                            "s": "FX:USDCNH",
+                            "d": "美元/人民币"
+                        }
+                    ],
+                    "originalTitle": "Forex"
+                }
+            ]
+            }
+        </script>
+    </div>
+    <!-- TradingView Widget END -->
+</body>
+</html>

@@ -1,0 +1,356 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.Mt5OrderMapper">
+    <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.Mt5Order">
+        <id column="order_id" jdbcType="VARCHAR" property="orderId" />
+        <result column="ai_robot_id" jdbcType="BIGINT" property="aiRobotId" />
+        <result column="ai_type" jdbcType="VARCHAR" property="aiType" />
+        <result column="order_type" jdbcType="VARCHAR" property="orderType" />
+        <result column="buy_price" jdbcType="DECIMAL" property="buyPrice" />
+        <result column="total_standard_hands" jdbcType="DECIMAL" property="totalStandardHands" />
+        <result column="total_fee" jdbcType="DECIMAL" property="totalFee" />
+        <result column="buy_service_fee" jdbcType="DECIMAL" property="buyServiceFee" />
+        <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
+        <result column="inventory_fee" jdbcType="DECIMAL" property="inventoryFee" />
+        <result column="sell_service_fee" jdbcType="DECIMAL" property="sellServiceFee" />
+        <result column="total_earnings" jdbcType="DECIMAL" property="totalEarnings" />
+        <result column="buy_time" jdbcType="TIMESTAMP" property="buyTime" />
+        <result column="sell_time" jdbcType="TIMESTAMP" property="sellTime" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="created_by" jdbcType="BIGINT" property="createdBy" />
+        <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+        <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        order_id, ai_robot_id, ai_type, order_type, buy_price, total_standard_hands, total_fee,
+        buy_service_fee, sell_price, inventory_fee, sell_service_fee, total_earnings, buy_time,
+        sell_time, status, created_by, created_time, updated_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from mt5_order
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+        delete from mt5_order
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </delete>
+    <insert id="insert" parameterType="com.caetp.digiex.entity.Mt5Order">
+        insert into mt5_order (order_id, ai_robot_id, ai_type,
+        order_type, buy_price, total_standard_hands,
+        total_fee, buy_service_fee, sell_price,
+        inventory_fee, sell_service_fee, total_earnings,
+        buy_time, sell_time, status,
+        created_by, created_time, updated_time
+        )
+        values (#{orderId,jdbcType=VARCHAR}, #{aiRobotId,jdbcType=BIGINT}, #{aiType,jdbcType=VARCHAR},
+        #{orderType,jdbcType=VARCHAR}, #{buyPrice,jdbcType=DECIMAL}, #{totalStandardHands,jdbcType=DECIMAL},
+        #{totalFee,jdbcType=DECIMAL}, #{buyServiceFee,jdbcType=DECIMAL}, #{sellPrice,jdbcType=DECIMAL},
+        #{inventoryFee,jdbcType=DECIMAL}, #{sellServiceFee,jdbcType=DECIMAL}, #{totalEarnings,jdbcType=DECIMAL},
+        #{buyTime,jdbcType=TIMESTAMP}, #{sellTime,jdbcType=TIMESTAMP}, #{status,jdbcType=INTEGER},
+        #{createdBy,jdbcType=BIGINT}, #{createdTime,jdbcType=TIMESTAMP}, #{updatedTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.caetp.digiex.entity.Mt5Order">
+        insert into mt5_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                order_id,
+            </if>
+            <if test="aiRobotId != null">
+                ai_robot_id,
+            </if>
+            <if test="aiType != null">
+                ai_type,
+            </if>
+            <if test="orderType != null">
+                order_type,
+            </if>
+            <if test="buyPrice != null">
+                buy_price,
+            </if>
+            <if test="totalStandardHands != null">
+                total_standard_hands,
+            </if>
+            <if test="totalFee != null">
+                total_fee,
+            </if>
+            <if test="buyServiceFee != null">
+                buy_service_fee,
+            </if>
+            <if test="sellPrice != null">
+                sell_price,
+            </if>
+            <if test="inventoryFee != null">
+                inventory_fee,
+            </if>
+            <if test="sellServiceFee != null">
+                sell_service_fee,
+            </if>
+            <if test="totalEarnings != null">
+                total_earnings,
+            </if>
+            <if test="buyTime != null">
+                buy_time,
+            </if>
+            <if test="sellTime != null">
+                sell_time,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="orderId != null">
+                #{orderId,jdbcType=VARCHAR},
+            </if>
+            <if test="aiRobotId != null">
+                #{aiRobotId,jdbcType=BIGINT},
+            </if>
+            <if test="aiType != null">
+                #{aiType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null">
+                #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="buyPrice != null">
+                #{buyPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="totalStandardHands != null">
+                #{totalStandardHands,jdbcType=DECIMAL},
+            </if>
+            <if test="totalFee != null">
+                #{totalFee,jdbcType=DECIMAL},
+            </if>
+            <if test="buyServiceFee != null">
+                #{buyServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sellPrice != null">
+                #{sellPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="inventoryFee != null">
+                #{inventoryFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sellServiceFee != null">
+                #{sellServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="totalEarnings != null">
+                #{totalEarnings,jdbcType=DECIMAL},
+            </if>
+            <if test="buyTime != null">
+                #{buyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sellTime != null">
+                #{sellTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.Mt5Order">
+        update mt5_order
+        <set>
+            <if test="aiRobotId != null">
+                ai_robot_id = #{aiRobotId,jdbcType=BIGINT},
+            </if>
+            <if test="aiType != null">
+                ai_type = #{aiType,jdbcType=VARCHAR},
+            </if>
+            <if test="orderType != null">
+                order_type = #{orderType,jdbcType=VARCHAR},
+            </if>
+            <if test="buyPrice != null">
+                buy_price = #{buyPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="totalStandardHands != null">
+                total_standard_hands = #{totalStandardHands,jdbcType=DECIMAL},
+            </if>
+            <if test="totalFee != null">
+                total_fee = #{totalFee,jdbcType=DECIMAL},
+            </if>
+            <if test="buyServiceFee != null">
+                buy_service_fee = #{buyServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sellPrice != null">
+                sell_price = #{sellPrice,jdbcType=DECIMAL},
+            </if>
+            <if test="inventoryFee != null">
+                inventory_fee = #{inventoryFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sellServiceFee != null">
+                sell_service_fee = #{sellServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="totalEarnings != null">
+                total_earnings = #{totalEarnings,jdbcType=DECIMAL},
+            </if>
+            <if test="buyTime != null">
+                buy_time = #{buyTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="sellTime != null">
+                sell_time = #{sellTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createdBy != null">
+                created_by = #{createdBy,jdbcType=BIGINT},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where order_id = #{orderId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.Mt5Order">
+    update mt5_order
+    set ai_robot_id = #{aiRobotId,jdbcType=BIGINT},
+      ai_type = #{aiType,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=VARCHAR},
+      buy_price = #{buyPrice,jdbcType=DECIMAL},
+      total_standard_hands = #{totalStandardHands,jdbcType=DECIMAL},
+      total_fee = #{totalFee,jdbcType=DECIMAL},
+      buy_service_fee = #{buyServiceFee,jdbcType=DECIMAL},
+      sell_price = #{sellPrice,jdbcType=DECIMAL},
+      inventory_fee = #{inventoryFee,jdbcType=DECIMAL},
+      sell_service_fee = #{sellServiceFee,jdbcType=DECIMAL},
+      total_earnings = #{totalEarnings,jdbcType=DECIMAL},
+      buy_time = #{buyTime,jdbcType=TIMESTAMP},
+      sell_time = #{sellTime,jdbcType=TIMESTAMP},
+      status = #{status,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=BIGINT},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+    where order_id = #{orderId,jdbcType=VARCHAR}
+  </update>
+
+
+
+
+
+  <!-- 更新mt5d订单账户，通过增减量的形式，防止以先去取值增减后再更新的方式在高并发下的数据安全问题 -->
+  <update id="updateMt5OrderByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.Mt5Order">
+    update mt5_order
+    <set>
+      <if test="totalStandardHands != null">
+        total_standard_hands = total_standard_hands + #{totalStandardHands},
+      </if>
+      <if test="totalFee != null">
+        total_fee = total_fee + #{totalFee},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where order_id = #{orderId}
+  </update>
+
+
+    <!--持仓订单列表-->
+    <select id="selectMt5PositionList" resultType="com.caetp.digiex.dto.cms.Mt5OrderCmsDto">
+       SELECT order_id orderId, buy_time buyTime,
+       buy_price buyPrice,buy_service_fee buyServiceFee, total_standard_hands totalStandardHands,
+        total_fee totalFee, total_earnings totalEarnings, updated_time updatedTime
+       FROM mt5_order
+       WHERE ai_robot_id = #{aiRobotId} AND status = 0
+    </select>
+
+    <!--平仓订单列表-->
+    <select id="selectMt5EveningUpList" resultType="com.caetp.digiex.dto.cms.Mt5OrderCmsDto">
+      SELECT order_id orderId,ai_type aiType,order_type orderType, buy_time buyTime, buy_price buyPrice, total_standard_hands totalStandardHands,
+        total_fee totalFee, sell_time sellTime, sell_price sellPrice, total_earnings totalEarnings, updated_time updatedTime
+      FROM mt5_order
+      WHERE ai_robot_id = #{aiRobotId} AND status = 1
+      ORDER BY order_id DESC
+    </select>
+
+    <!--平仓或持仓订单详情-->
+    <select id="mt5OrderDetail" resultType="com.caetp.digiex.dto.cms.Mt5OrderDetailCmsDto">
+      SELECT order_id orderId, buy_time buyTime, buy_price buyPrice, total_standard_hands totalStandardHands,inventory_fee inventoryFee,ai_type aiType,order_type orderType,
+        total_fee totalFee, sell_time sellTime, sell_price sellPrice, total_earnings totalEarnings, updated_time updatedTime,
+        buy_service_fee buyServiceFee, inventory_fee inventoryFee, sell_service_fee sellServiceFee
+      FROM mt5_order
+      WHERE order_id = #{orderId}
+    </select>
+
+    <!--平仓或持仓订单用户列表详情-->
+    <select id="userOrdersByMT5OrderId" resultType="com.caetp.digiex.dto.cms.UserOrderCmsDto">
+        SELECT u.id, m.nick_name nickName, m.mobile, u.created_time createdTime, u.standard_hands standardHands,
+        u.fee, mu.earnings, status
+        FROM user_order u
+        LEFT JOIN mt5_user_order mu ON u.id = mu.user_order_id
+        LEFT JOIN member m ON u.member_id = m.member_id
+        WHERE mu.mt5_order_id = #{orderId}
+        ORDER BY u.created_time DESC
+    </select>
+
+    <select id="mt5UserOrderList" resultType="com.caetp.digiex.dto.cms.UserOrderMT5CmsDto">
+        SELECT u.id, u.standard_hands standardHands, u.status, u.member_id memberId,u.fee, u.petty_cash pettyCash,
+        u.earnings, u.inventory_fee inventoryFee, u.sell_service_fee sellServiceFee, a.stop_loss_limit stopLossLimit
+        FROM user_order u
+        LEFT JOIN mt5_user_order mu ON u.id = mu.user_order_id
+        LEFT JOIN ai_robot a ON u.ai_robot_id = a.id
+        WHERE mu.mt5_order_id = #{orderId}
+    </select>
+
+    <select id="selectMt5ByUndoneInfoView" resultType="com.caetp.digiex.dto.cms.UserOrderCmsDto">
+      SELECT u.id, m.nick_name nickName, m.mobile, u.created_time createdTime, u.standard_hands standardHands,
+        u.fee, u.earnings, status, u.buy_service_fee buyServiceFee
+      FROM user_order u
+      LEFT JOIN member m ON u.member_id = m.member_id
+      WHERE u.ai_robot_id = #{aiRobotId} AND status in (0, 1, 2) AND u.created_time &lt; #{nowDate}
+      ORDER BY u.status ASC, u.created_time DESC
+    </select>
+
+    <select id="tradingMt5Orders" resultType="int">
+        SELECT COUNT(order_id)
+        FROM mt5_order
+        WHERE ai_robot_id = #{aiRobotId} AND status = 0
+    </select>
+
+    <select id="finishMt5Orders" resultType="int">
+        SELECT COUNT(order_id)
+        FROM mt5_order
+        WHERE ai_robot_id = #{aiRobotId} AND created_time >= #{nowDate} AND status = 1
+    </select>
+
+    <select id="selectUndoneMt5Order" resultType="com.caetp.digiex.dto.cms.Mt5OrderCmsDto">
+      SELECT IFNULL(SUM(u.standard_hands), 0.0) totalStandardHands, IFNULL(SUM(u.fee), 0.0) totalFee
+      FROM user_order u
+      WHERE u.ai_robot_id = #{aiRobotId} AND status in (0, 1, 2) AND u.created_time &lt; #{nowDate}
+    </select>
+
+    <update id="sellMt5Order">
+        update mt5_order
+        set sell_price = #{sellPrice},
+        sell_service_fee = #{sellServiceFee},
+        total_earnings = #{totalEarnings},
+        sell_time = #{sellTime},
+        inventory_fee = #{inventoryFee},
+        status = 1
+        where order_id = #{orderId} AND status = 0
+    </update>
+
+</mapper>

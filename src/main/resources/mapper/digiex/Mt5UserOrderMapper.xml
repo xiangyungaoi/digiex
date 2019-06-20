@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.Mt5UserOrderMapper">
+    <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.Mt5UserOrder">
+        <id column="mt5_order_id" jdbcType="VARCHAR" property="mt5OrderId" />
+        <id column="user_order_id" jdbcType="BIGINT" property="userOrderId" />
+        <result column="buy_service_fee" jdbcType="DECIMAL" property="buyServiceFee" />
+        <result column="inventory_fee" jdbcType="DECIMAL" property="inventoryFee" />
+        <result column="sell_service_fee" jdbcType="DECIMAL" property="sellServiceFee" />
+        <result column="earnings" jdbcType="DECIMAL" property="earnings" />
+        <result column="sell_time" jdbcType="TIMESTAMP" property="sellTime" />
+    </resultMap>
+    <sql id="Base_Column_List">
+        mt5_order_id, user_order_id, buy_service_fee, inventory_fee, sell_service_fee, earnings,
+        sell_time
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from mt5_user_order
+        where mt5_order_id = #{mt5OrderId,jdbcType=VARCHAR}
+        and user_order_id = #{userOrderId,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="map">
+        delete from mt5_user_order
+        where mt5_order_id = #{mt5OrderId,jdbcType=VARCHAR}
+        and user_order_id = #{userOrderId,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.caetp.digiex.entity.Mt5UserOrder">
+        insert into mt5_user_order (mt5_order_id, user_order_id, buy_service_fee,
+        inventory_fee, sell_service_fee, earnings,
+        sell_time)
+        values (#{mt5OrderId,jdbcType=VARCHAR}, #{userOrderId,jdbcType=BIGINT}, #{buyServiceFee,jdbcType=DECIMAL},
+        #{inventoryFee,jdbcType=DECIMAL}, #{sellServiceFee,jdbcType=DECIMAL}, #{earnings,jdbcType=DECIMAL},
+        #{sellTime,jdbcType=TIMESTAMP})
+    </insert>
+    <insert id="insertSelective" parameterType="com.caetp.digiex.entity.Mt5UserOrder">
+        insert into mt5_user_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="mt5OrderId != null">
+                mt5_order_id,
+            </if>
+            <if test="userOrderId != null">
+                user_order_id,
+            </if>
+            <if test="buyServiceFee != null">
+                buy_service_fee,
+            </if>
+            <if test="inventoryFee != null">
+                inventory_fee,
+            </if>
+            <if test="sellServiceFee != null">
+                sell_service_fee,
+            </if>
+            <if test="earnings != null">
+                earnings,
+            </if>
+            <if test="sellTime != null">
+                sell_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="mt5OrderId != null">
+                #{mt5OrderId,jdbcType=VARCHAR},
+            </if>
+            <if test="userOrderId != null">
+                #{userOrderId,jdbcType=BIGINT},
+            </if>
+            <if test="buyServiceFee != null">
+                #{buyServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="inventoryFee != null">
+                #{inventoryFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sellServiceFee != null">
+                #{sellServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="earnings != null">
+                #{earnings,jdbcType=DECIMAL},
+            </if>
+            <if test="sellTime != null">
+                #{sellTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.Mt5UserOrder">
+        update mt5_user_order
+        <set>
+            <if test="buyServiceFee != null">
+                buy_service_fee = #{buyServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="inventoryFee != null">
+                inventory_fee = #{inventoryFee,jdbcType=DECIMAL},
+            </if>
+            <if test="sellServiceFee != null">
+                sell_service_fee = #{sellServiceFee,jdbcType=DECIMAL},
+            </if>
+            <if test="earnings != null">
+                earnings = #{earnings,jdbcType=DECIMAL},
+            </if>
+            <if test="sellTime != null">
+                sell_time = #{sellTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where mt5_order_id = #{mt5OrderId,jdbcType=VARCHAR}
+        and user_order_id = #{userOrderId,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.Mt5UserOrder">
+    update mt5_user_order
+    set buy_service_fee = #{buyServiceFee,jdbcType=DECIMAL},
+      inventory_fee = #{inventoryFee,jdbcType=DECIMAL},
+      sell_service_fee = #{sellServiceFee,jdbcType=DECIMAL},
+      earnings = #{earnings,jdbcType=DECIMAL},
+      sell_time = #{sellTime,jdbcType=TIMESTAMP}
+    where mt5_order_id = #{mt5OrderId,jdbcType=VARCHAR}
+      and user_order_id = #{userOrderId,jdbcType=BIGINT}
+  </update>
+
+
+    <select id="transactionRecordList" resultType="com.caetp.digiex.dto.api.TransactionRecordDTO">
+        SELECT r.name rName, mu.inventory_fee inventoryFee, mu.buy_service_fee+mu.sell_service_fee serviceFee,
+                mu.earnings earnings, m.order_type orderType, m.ai_type aiType, u.standard_hands standardHands,
+                m.buy_time buyTime, m.buy_price buyPrice, m.sell_time sellTime, m.sell_price sellPrice, u.standard_hands standardHands
+        FROM mt5_user_order mu
+        LEFT JOIN mt5_order m ON m.`order_id` = mu.`mt5_order_id`
+        LEFT JOIN user_order u ON u.`id` = mu.`user_order_id`
+        LEFT JOIN ai_robot r ON r.`id` = m.`ai_robot_id`
+        WHERE u.`member_id` = #{memberId}
+        <if test="userOrderId != null">
+        AND mu.`user_order_id` = #{userOrderId}
+        </if>
+        <if test="orderType == 'all'">
+        AND 1 = 1
+        </if>
+        <if test="orderType != null and orderType != 'all'">
+        AND m.order_type = #{orderType}
+        </if>
+         AND m.`status`=1
+        ORDER BY m.`buy_time` DESC,mu.mt5_order_id DESC
+    </select>
+
+    <select id="countAiTradeById" parameterType="long" resultType="java.lang.Integer">
+      SELECT COUNT(mt5_order_id)
+      FROM mt5_user_order
+      WHERE user_order_id = #{id} AND sell_time IS NOT NULL
+    </select>
+</mapper>

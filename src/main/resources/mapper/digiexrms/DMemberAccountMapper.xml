@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.rmsmapper.DMemberAccountMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.DMemberAccount">
+    <id column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="account_balance" jdbcType="BIGINT" property="accountBalance" />
+    <result column="promotion_reward" jdbcType="BIGINT" property="promotionReward" />
+    <result column="difference_reward" jdbcType="BIGINT" property="differenceReward" />
+    <result column="invitation_reward" jdbcType="BIGINT" property="invitationReward" />
+    <result column="circular_reward" jdbcType="BIGINT" property="circularReward" />
+    <result column="eenx_balance" jdbcType="DOUBLE" property="eenxBalance" />
+    <result column="cny_balance" jdbcType="BIGINT" property="cnyBalance" />
+    <result column="usd_balance" jdbcType="BIGINT" property="usdBalance" />
+    <result column="eur_balance" jdbcType="BIGINT" property="eurBalance" />
+    <result column="hkd_balance" jdbcType="BIGINT" property="hkdBalance" />
+    <result column="free_recharge_amount" jdbcType="BIGINT" property="freeRechargeAmount" />
+    <result column="free_withdraw_amount" jdbcType="BIGINT" property="freeWithdrawAmount" />
+    <result column="sign_points_balance" jdbcType="BIGINT" property="signPointsBalance" />
+    <result column="created_by" jdbcType="INTEGER" property="createdBy" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_by" jdbcType="INTEGER" property="updatedBy" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    member_id, account_balance, promotion_reward, difference_reward, invitation_reward,
+    circular_reward, eenx_balance, cny_balance, usd_balance, eur_balance, hkd_balance,
+    free_recharge_amount, free_withdraw_amount, sign_points_balance, created_by, created_time,
+    updated_by, updated_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from d_member_account
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from d_member_account
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.DMemberAccount">
+    insert into d_member_account (member_id, account_balance, promotion_reward,
+    difference_reward, invitation_reward, circular_reward,
+    eenx_balance, cny_balance, usd_balance,
+    eur_balance, hkd_balance, free_recharge_amount,
+    free_withdraw_amount, sign_points_balance, created_by,
+    created_time, updated_by, updated_time
+    )
+    values (#{memberId,jdbcType=INTEGER}, #{accountBalance,jdbcType=BIGINT}, #{promotionReward,jdbcType=BIGINT},
+    #{differenceReward,jdbcType=BIGINT}, #{invitationReward,jdbcType=BIGINT}, #{circularReward,jdbcType=BIGINT},
+    #{eenxBalance,jdbcType=DOUBLE}, #{cnyBalance,jdbcType=BIGINT}, #{usdBalance,jdbcType=BIGINT},
+    #{eurBalance,jdbcType=BIGINT}, #{hkdBalance,jdbcType=BIGINT}, #{freeRechargeAmount,jdbcType=BIGINT},
+    #{freeWithdrawAmount,jdbcType=BIGINT}, #{signPointsBalance,jdbcType=BIGINT}, #{createdBy,jdbcType=INTEGER},
+    #{createdTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=INTEGER}, #{updatedTime,jdbcType=TIMESTAMP}
+    )
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.DMemberAccount">
+    insert into d_member_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="accountBalance != null">
+        account_balance,
+      </if>
+      <if test="promotionReward != null">
+        promotion_reward,
+      </if>
+      <if test="differenceReward != null">
+        difference_reward,
+      </if>
+      <if test="invitationReward != null">
+        invitation_reward,
+      </if>
+      <if test="circularReward != null">
+        circular_reward,
+      </if>
+      <if test="eenxBalance != null">
+        eenx_balance,
+      </if>
+      <if test="cnyBalance != null">
+        cny_balance,
+      </if>
+      <if test="usdBalance != null">
+        usd_balance,
+      </if>
+      <if test="eurBalance != null">
+        eur_balance,
+      </if>
+      <if test="hkdBalance != null">
+        hkd_balance,
+      </if>
+      <if test="freeRechargeAmount != null">
+        free_recharge_amount,
+      </if>
+      <if test="freeWithdrawAmount != null">
+        free_withdraw_amount,
+      </if>
+      <if test="signPointsBalance != null">
+        sign_points_balance,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="accountBalance != null">
+        #{accountBalance,jdbcType=BIGINT},
+      </if>
+      <if test="promotionReward != null">
+        #{promotionReward,jdbcType=BIGINT},
+      </if>
+      <if test="differenceReward != null">
+        #{differenceReward,jdbcType=BIGINT},
+      </if>
+      <if test="invitationReward != null">
+        #{invitationReward,jdbcType=BIGINT},
+      </if>
+      <if test="circularReward != null">
+        #{circularReward,jdbcType=BIGINT},
+      </if>
+      <if test="eenxBalance != null">
+        #{eenxBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="cnyBalance != null">
+        #{cnyBalance,jdbcType=BIGINT},
+      </if>
+      <if test="usdBalance != null">
+        #{usdBalance,jdbcType=BIGINT},
+      </if>
+      <if test="eurBalance != null">
+        #{eurBalance,jdbcType=BIGINT},
+      </if>
+      <if test="hkdBalance != null">
+        #{hkdBalance,jdbcType=BIGINT},
+      </if>
+      <if test="freeRechargeAmount != null">
+        #{freeRechargeAmount,jdbcType=BIGINT},
+      </if>
+      <if test="freeWithdrawAmount != null">
+        #{freeWithdrawAmount,jdbcType=BIGINT},
+      </if>
+      <if test="signPointsBalance != null">
+        #{signPointsBalance,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.DMemberAccount">
+    update d_member_account
+    <set>
+      <if test="accountBalance != null">
+        account_balance = #{accountBalance,jdbcType=BIGINT},
+      </if>
+      <if test="promotionReward != null">
+        promotion_reward = #{promotionReward,jdbcType=BIGINT},
+      </if>
+      <if test="differenceReward != null">
+        difference_reward = #{differenceReward,jdbcType=BIGINT},
+      </if>
+      <if test="invitationReward != null">
+        invitation_reward = #{invitationReward,jdbcType=BIGINT},
+      </if>
+      <if test="circularReward != null">
+        circular_reward = #{circularReward,jdbcType=BIGINT},
+      </if>
+      <if test="eenxBalance != null">
+        eenx_balance = #{eenxBalance,jdbcType=DOUBLE},
+      </if>
+      <if test="cnyBalance != null">
+        cny_balance = #{cnyBalance,jdbcType=BIGINT},
+      </if>
+      <if test="usdBalance != null">
+        usd_balance = #{usdBalance,jdbcType=BIGINT},
+      </if>
+      <if test="eurBalance != null">
+        eur_balance = #{eurBalance,jdbcType=BIGINT},
+      </if>
+      <if test="hkdBalance != null">
+        hkd_balance = #{hkdBalance,jdbcType=BIGINT},
+      </if>
+      <if test="freeRechargeAmount != null">
+        free_recharge_amount = #{freeRechargeAmount,jdbcType=BIGINT},
+      </if>
+      <if test="freeWithdrawAmount != null">
+        free_withdraw_amount = #{freeWithdrawAmount,jdbcType=BIGINT},
+      </if>
+      <if test="signPointsBalance != null">
+        sign_points_balance = #{signPointsBalance,jdbcType=BIGINT},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.DMemberAccount">
+    update d_member_account
+    set account_balance = #{accountBalance,jdbcType=BIGINT},
+      promotion_reward = #{promotionReward,jdbcType=BIGINT},
+      difference_reward = #{differenceReward,jdbcType=BIGINT},
+      invitation_reward = #{invitationReward,jdbcType=BIGINT},
+      circular_reward = #{circularReward,jdbcType=BIGINT},
+      eenx_balance = #{eenxBalance,jdbcType=DOUBLE},
+      cny_balance = #{cnyBalance,jdbcType=BIGINT},
+      usd_balance = #{usdBalance,jdbcType=BIGINT},
+      eur_balance = #{eurBalance,jdbcType=BIGINT},
+      hkd_balance = #{hkdBalance,jdbcType=BIGINT},
+      free_recharge_amount = #{freeRechargeAmount,jdbcType=BIGINT},
+      free_withdraw_amount = #{freeWithdrawAmount,jdbcType=BIGINT},
+      sign_points_balance = #{signPointsBalance,jdbcType=BIGINT},
+      created_by = #{createdBy,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=INTEGER},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+
+  <!-- 更新账户，通过增减量的形式，防止以先去取值增减后再更新的方式在高并发下的数据安全问题 -->
+  <update id="updateAccountByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.DMemberAccountIncrement">
+    update d_member_account
+    <set>
+      <if test="accountBalanceIncrement != null">
+        account_balance = account_balance + #{accountBalanceIncrement},
+      </if>
+      <if test="promotionRewardIncrement != null">
+        promotion_reward = promotion_reward + #{promotionRewardIncrement},
+      </if>
+      <if test="differenceRewardIncrement != null">
+        difference_reward = difference_reward + #{differenceRewardIncrement},
+      </if>
+      <if test="invitationRewardIncrement != null">
+        invitation_reward = invitation_reward + #{invitationRewardIncrement},
+      </if>
+      <if test="circularRewardIncrement != null">
+        circular_reward = circular_reward + #{circularRewardIncrement},
+      </if>
+      <if test="eenxBalanceIncrement != null">
+        eenx_balance = eenx_balance + #{eenxBalanceIncrement},
+      </if>
+      <if test="cnyBalanceIncrement != null">
+        cny_balance = cny_balance + #{cnyBalanceIncrement},
+      </if>
+      <if test="usdBalanceIncrement != null">
+        usd_balance = usd_balance + #{usdBalanceIncrement},
+      </if>
+      <if test="eurBalanceIncrement != null">
+        eur_balance = eur_balance + #{eurBalanceIncrement},
+      </if>
+      <if test="hkdBalanceIncrement != null">
+        hkd_balance = hkd_balance + #{hkdBalanceIncrement},
+      </if>
+      <if test="freeRechargeAmountIncrement != null">
+        free_recharge_amount = free_recharge_amount + #{freeRechargeAmountIncrement},
+      </if>
+      <if test="freeWithdrawAmountIncrement != null">
+        free_withdraw_amount = free_withdraw_amount + #{freeWithdrawAmountIncrement},
+      </if>
+      <if test="signPointsBalanceIncrement != null">
+        sign_points_balance = sign_points_balance + #{signPointsBalanceIncrement},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+
+  <select id="getUserUsdAmount" resultType="com.caetp.digiex.entity.DMemberAccount" parameterType="string">
+    SELECT dmc.usd_balance usdBalance
+    FROM d_member_account dmc
+    WHERE dmc.member_id = #{memberid}
+  </select>
+
+
+</mapper>

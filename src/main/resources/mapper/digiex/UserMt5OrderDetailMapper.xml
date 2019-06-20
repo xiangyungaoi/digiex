@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.UserMt5OrderDetailMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.UserMt5OrderDetail">
+    <id column="order" jdbcType="INTEGER" property="order" />
+    <result column="position_id" jdbcType="INTEGER" property="positionId" />
+    <result column="symbol" jdbcType="VARCHAR" property="symbol" />
+    <result column="order_type" jdbcType="INTEGER" property="orderType" />
+    <result column="login" jdbcType="INTEGER" property="login" />
+    <result column="digits" jdbcType="INTEGER" property="digits" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="final_volume" jdbcType="DOUBLE" property="finalVolume" />
+    <result column="done_time" jdbcType="TIMESTAMP" property="doneTime" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="order_price" jdbcType="DECIMAL" property="orderPrice" />
+    <result column="sl" jdbcType="DECIMAL" property="sl" />
+    <result column="tp" jdbcType="DECIMAL" property="tp" />
+    <result column="expiration_time" jdbcType="TIMESTAMP" property="expirationTime" />
+    <result column="reason" jdbcType="INTEGER" property="reason" />
+    <result column="marginrate" jdbcType="DOUBLE" property="marginrate" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="setup_time" jdbcType="TIMESTAMP" property="setupTime" />
+    <result column="fill_type" jdbcType="INTEGER" property="fillType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    `order`, position_id, symbol, order_type, login, digits, `type`, final_volume, done_time,
+    state, order_price, sl, tp, expiration_time, reason, marginrate, `comment`, setup_time,
+    fill_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_mt5_order_detail
+    where `order` = #{order,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user_mt5_order_detail
+    where `order` = #{order,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.UserMt5OrderDetail">
+    insert into user_mt5_order_detail (`order`, position_id, symbol,
+      order_type, login, digits, 
+      `type`, final_volume, done_time,
+      state, order_price, sl, 
+      tp, expiration_time, reason, 
+      marginrate, `comment`, setup_time,
+      fill_type)
+    values (#{order,jdbcType=INTEGER}, #{positionId,jdbcType=INTEGER}, #{symbol,jdbcType=VARCHAR}, 
+      #{orderType,jdbcType=INTEGER}, #{login,jdbcType=INTEGER}, #{digits,jdbcType=INTEGER}, 
+      #{type,jdbcType=INTEGER}, #{finalVolume,jdbcType=DOUBLE}, #{doneTime,jdbcType=TIMESTAMP}, 
+      #{state,jdbcType=INTEGER}, #{orderPrice,jdbcType=DECIMAL}, #{sl,jdbcType=DECIMAL}, 
+      #{tp,jdbcType=DECIMAL}, #{expirationTime,jdbcType=TIMESTAMP}, #{reason,jdbcType=INTEGER}, 
+      #{marginrate,jdbcType=DOUBLE}, #{comment,jdbcType=VARCHAR}, #{setupTime,jdbcType=TIMESTAMP}, 
+      #{fillType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.UserMt5OrderDetail">
+    insert into user_mt5_order_detail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="order != null">
+        `order`,
+      </if>
+      <if test="positionId != null">
+        position_id,
+      </if>
+      <if test="symbol != null">
+        symbol,
+      </if>
+      <if test="orderType != null">
+        order_type,
+      </if>
+      <if test="login != null">
+        login,
+      </if>
+      <if test="digits != null">
+        digits,
+      </if>
+      <if test="type != null">
+        `type`,
+      </if>
+      <if test="finalVolume != null">
+        final_volume,
+      </if>
+      <if test="doneTime != null">
+        done_time,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="orderPrice != null">
+        order_price,
+      </if>
+      <if test="sl != null">
+        sl,
+      </if>
+      <if test="tp != null">
+        tp,
+      </if>
+      <if test="expirationTime != null">
+        expiration_time,
+      </if>
+      <if test="reason != null">
+        reason,
+      </if>
+      <if test="marginrate != null">
+        marginrate,
+      </if>
+      <if test="comment != null">
+        `comment`,
+      </if>
+      <if test="setupTime != null">
+        setup_time,
+      </if>
+      <if test="fillType != null">
+        fill_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="order != null">
+        #{order,jdbcType=INTEGER},
+      </if>
+      <if test="positionId != null">
+        #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="symbol != null">
+        #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="login != null">
+        #{login,jdbcType=INTEGER},
+      </if>
+      <if test="digits != null">
+        #{digits,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="finalVolume != null">
+        #{finalVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="doneTime != null">
+        #{doneTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=INTEGER},
+      </if>
+      <if test="orderPrice != null">
+        #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sl != null">
+        #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="tp != null">
+        #{tp,jdbcType=DECIMAL},
+      </if>
+      <if test="expirationTime != null">
+        #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null">
+        #{reason,jdbcType=INTEGER},
+      </if>
+      <if test="marginrate != null">
+        #{marginrate,jdbcType=DOUBLE},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="setupTime != null">
+        #{setupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fillType != null">
+        #{fillType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.UserMt5OrderDetail">
+    update user_mt5_order_detail
+    <set>
+      <if test="positionId != null">
+        position_id = #{positionId,jdbcType=INTEGER},
+      </if>
+      <if test="symbol != null">
+        symbol = #{symbol,jdbcType=VARCHAR},
+      </if>
+      <if test="orderType != null">
+        order_type = #{orderType,jdbcType=INTEGER},
+      </if>
+      <if test="login != null">
+        login = #{login,jdbcType=INTEGER},
+      </if>
+      <if test="digits != null">
+        digits = #{digits,jdbcType=INTEGER},
+      </if>
+      <if test="type != null">
+        `type` = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="finalVolume != null">
+        final_volume = #{finalVolume,jdbcType=DOUBLE},
+      </if>
+      <if test="doneTime != null">
+        done_time = #{doneTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=INTEGER},
+      </if>
+      <if test="orderPrice != null">
+        order_price = #{orderPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="sl != null">
+        sl = #{sl,jdbcType=DECIMAL},
+      </if>
+      <if test="tp != null">
+        tp = #{tp,jdbcType=DECIMAL},
+      </if>
+      <if test="expirationTime != null">
+        expiration_time = #{expirationTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="reason != null">
+        reason = #{reason,jdbcType=INTEGER},
+      </if>
+      <if test="marginrate != null">
+        marginrate = #{marginrate,jdbcType=DOUBLE},
+      </if>
+      <if test="comment != null">
+        `comment` = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="setupTime != null">
+        setup_time = #{setupTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fillType != null">
+        fill_type = #{fillType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where `order` = #{order,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.UserMt5OrderDetail">
+    update user_mt5_order_detail
+    set position_id = #{positionId,jdbcType=INTEGER},
+      symbol = #{symbol,jdbcType=VARCHAR},
+      order_type = #{orderType,jdbcType=INTEGER},
+      login = #{login,jdbcType=INTEGER},
+      digits = #{digits,jdbcType=INTEGER},
+      `type` = #{type,jdbcType=INTEGER},
+      final_volume = #{finalVolume,jdbcType=DOUBLE},
+      done_time = #{doneTime,jdbcType=TIMESTAMP},
+      state = #{state,jdbcType=INTEGER},
+      order_price = #{orderPrice,jdbcType=DECIMAL},
+      sl = #{sl,jdbcType=DECIMAL},
+      tp = #{tp,jdbcType=DECIMAL},
+      expiration_time = #{expirationTime,jdbcType=TIMESTAMP},
+      reason = #{reason,jdbcType=INTEGER},
+      marginrate = #{marginrate,jdbcType=DOUBLE},
+      `comment` = #{comment,jdbcType=VARCHAR},
+      setup_time = #{setupTime,jdbcType=TIMESTAMP},
+      fill_type = #{fillType,jdbcType=INTEGER}
+    where `order` = #{order,jdbcType=INTEGER}
+  </update>
+
+  <select id="getUserManualHistoryOrder" resultType="com.caetp.digiex.entity.UserMt5OrderDetail" parameterType="integer">
+    SELECT umod.symbol symbol, umod.position_id positionId, umod.order `order`, umod.final_volume finalVolume,
+     umod.type `type`,umod.order_price orderPrice,umod.done_time doneTime
+    FROM user_mt5_order_detail umod
+    WHERE umod.`login`= #{login} AND umod.`order` != umod.`position_id`  AND umod.position_id !=0;
+  </select>
+
+  <select id="getCencleOrders" resultType="com.caetp.digiex.entity.UserMt5OrderDetail">
+    SELECT umod.order `order`, umod.symbol symbol, umod.type `type`, umod.order_price orderPrice,
+    umod.final_volume finalVolume, umod.done_time doneTime
+    FROM user_mt5_order_detail umod
+    WHERE umod.state = 2 and login = #{login};
+  </select>
+
+</mapper>

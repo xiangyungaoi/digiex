@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.SysDataMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.SysData">
+    <id column="key_" jdbcType="VARCHAR" property="key" />
+    <result column="value_" jdbcType="VARCHAR" property="value" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    key_, value_
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from sys_data
+    where key_ = #{key,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from sys_data
+    where key_ = #{key,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.SysData">
+    insert into sys_data (key_, value_)
+    values (#{key,jdbcType=VARCHAR}, #{value,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.SysData">
+    insert into sys_data
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="key != null">
+        key_,
+      </if>
+      <if test="value != null">
+        value_,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="key != null">
+        #{key,jdbcType=VARCHAR},
+      </if>
+      <if test="value != null">
+        #{value,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.SysData">
+    update sys_data
+    <set>
+      <if test="value != null">
+        value_ = #{value,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where key_ = #{key,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.SysData">
+    update sys_data
+    set value_ = #{value,jdbcType=VARCHAR}
+    where key_ = #{key,jdbcType=VARCHAR}
+  </update>
+</mapper>

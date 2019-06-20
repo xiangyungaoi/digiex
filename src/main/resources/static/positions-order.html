@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="img/favicon.ico" />
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="js/kkpager/kkpager.css" />
+		<title>持仓订单</title>
+	</head>
+	<body>
+		<div class="paddingA30">
+			<div class="tab-list clearfix margB30" id="js-ai-name">
+
+			</div>
+			<div class="tab-main">
+				<div class="tab-cont">
+					<div class="table margB40">
+						<table>
+							<thead>
+								<tr>
+									<th style="width: 15%;">订单编号</th>
+									<th style="width: 15%;">建仓时间</th>
+									<th style="width: 10%;">建仓点数</th>
+									<th style="width: 10%;">总手数</th>
+									<th style="width: 10%;">总金额</th>
+									<th style="width: 10%;">总浮动盈亏</th>
+									<th style="width: 15%;">更新时间</th>
+									<th style="width: 15%;">操作</th>
+								</tr>
+							</thead>
+							<tbody id="position-orders"></tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div id="kkpager" class="clearfix" style="height: 50px;"></div>
+		</div>
+		<!--平仓-->
+		<script type="text/html" id="evening-up-main">
+			<div class="layer-box">
+				<ul class="">
+					<li class="margB15">
+						<label for="" class="label-b">币种：</label>
+						<span class="size14px c222222 js-ai-type"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">方向：</label>
+						<span class="size14px c222222 js-order-type"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总手数：</label>
+						<span class="size14px c222222 js-total-hands"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总金额：</label>
+						<span class="size14px c222222 js-total-fee"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓点数：</label>
+						<span class="size14px c222222 js-buy-price"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓手续费：</label>
+						<span class="size14px c222222 js-buy-service-price"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">平仓时间：</label>
+						<input type="text" class="input" id="sellTime" name="sellTime"/>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">平仓点数：</label>
+						<input type="text" class="input" name="sellPrice"/>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">平仓手续费：</label>
+						<input type="text" class="input" name="sellServiceFee"/><span class="size14px c222222 margL5">$</span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">库存费：</label>
+						<input type="text" class="input" name="inventoryFee" /><span class="size14px c222222 margL5" >$</span>
+					</li>
+					<li class="margB36">
+						<label for="" class="label-b">总平仓盈亏：</label>
+						<input type="text" class="input" name="totalWarnings"/><span class="size14px c222222 margL5">$</span>
+					</li>
+				</ul>
+				<div class="layerBtn clearfix margL115">
+					<button class="fl but bffa10a cffffff margR20 bff8a3b js-sell-sure">确定</button>
+					<button class="fr but bffffff bA cb5b7bc  layui-layer-close">取消</button>
+				</div>
+			</div>
+		</script>
+	</body>
+	<script type="text/html" id="js-ai-name-list">
+		<%for(var i in data){%>
+		<div class="fl tab cursor text-center bRN" data-id="<%=data[i].id%>" data-name="<%=data[i].name%>" id="robot"><%=data[i].name%></div>
+		<%}%>
+	</script>
+	<script type="text/html" id="position-orders-list">
+		<%for(var i in data){%>
+		<tr>
+			<td><%=data[i].orderId%></td>
+			<td><%=data[i].buyTime%></td>
+			<td><%=data[i].buyPrice%></td>
+			<td><%=data[i].totalStandardHands%></td>
+			<td><%=data[i].totalFee%>$</td>
+			<td><!--$<%=data[i].totalEarnings%>-->-</td>
+			<td><%=data[i].updatedTime%></td>
+			<td>
+				<a href="javascript:void(0)" data-id="<%=data[i].orderId%>" class="js-position-order-detail"><span class="paddingLR15 size12px c1f88ff cursor">详情</span></a>
+				<span data-order="<%=data[i].orderId%>" data-fee="<%=data[i].totalFee%>" data-hands="<%=data[i].totalStandardHands%>" data-price="<%=data[i].buyPrice%>" data-service="<%=data[i].buyServiceFee%>" class="paddingLR15 size12px c1f88ff cursor js-evening-up">平仓</span>
+			</td>
+		</tr>
+		<%}%>
+	</script>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/style.js"></script>
+	<script type="text/javascript" src="utils/template.js"></script>
+	<script type="text/javascript" src="utils/data.js"></script>
+	<script type="text/javascript" src="utils/utils.js"></script>
+	<script type="text/javascript" src="js/laydate/laydate.js"></script>
+	<script type="text/javascript" src="ps/common.js"></script>
+	<script type="text/javascript" src="js/layer/layer.js"></script>
+	<script type="text/javascript" src="js/kkpager/kkpager.js"></script>
+	<script type="text/javascript" src="ps/positions-order.js"></script>
+</html>

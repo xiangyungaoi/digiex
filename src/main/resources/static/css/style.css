@@ -1,0 +1,381 @@
+
+.user-info {
+	margin-right: 60px;
+	margin-top: 20px;
+}
+.btn0 {
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border: 1px solid #CCD0D4;
+	box-sizing: border-box;
+	background: #FFFFFF;
+	border-radius: 2px;
+	vertical-align: middle!important;
+}
+/**
+ * layerHeight
+ * **/
+.Height412 .layui-layer-content{
+	height: 412px!important;
+	box-sizing: border-box;
+}
+
+.Height412 .layui-layer-title {
+	text-align: center!important;
+}
+.Height412 iframe {
+	height: 421px!important;
+	height: 630px!important;
+}
+
+.Height190 .layui-layer-content{
+	height: 190px!important;
+	box-sizing: border-box;
+}
+
+.Height150 .layui-layer-content{
+	height: 150px!important;
+	box-sizing: border-box;
+}
+
+.Height155 .layui-layer-content{
+	height: 155px!important;
+	box-sizing: border-box;
+}
+
+.Height171 .layui-layer-content{
+	height: 171px!important;
+	box-sizing: border-box;
+}
+
+.Height332 .layui-layer-content{
+	height: 450px!important;
+	box-sizing: border-box;
+}
+
+.Height512 .layui-layer-content{
+	height: 552px!important;
+	box-sizing: border-box;
+}
+.layer-title-center .layui-layer-content{
+	height: 412px!important;
+	box-sizing: border-box;
+}
+.layer-title-center .layui-layer-title {
+	text-align: center!important;
+}
+.layerBtn .but {
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border-radius: 2px;
+	width: 120px;
+}
+.layer-box {
+	padding:0 20px;
+	box-sizing: border-box;
+}
+
+
+/**login.styl**/
+.sign-in {
+	background: url(../img/bg.png);
+	background-repeat: no-repeat;
+	height: 360px;
+	width: 100%;
+}
+.signIn,.register {
+	top: -199px;
+	text-align: center;
+	
+}
+.signIn .title,.register .title {
+	font-size: 26px;
+	color: #FFFFFF;
+	margin-bottom: 60px;
+}
+.signIn-box {
+	width: 800px;
+	margin: 0 auto;
+	background: #FFFFFF;
+	box-shadow: 0px 0px 3px 4px rgba(163, 169, 190, 0.12);
+	padding: 40px 188px;
+	box-sizing: border-box;
+}
+.loginput{
+	width: 420px;
+	height: 52px;
+	line-height: 52px;
+	border: 1px solid #CCD3DB;
+	outline: none;
+	padding: 0 0 0 8px;
+	box-sizing: border-box;
+	font-size: 15px;
+	color: #8F9CAE;
+}
+.addressinput{
+	width: 137px;
+
+}
+.loginBtn {
+	width: 160px;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	color: #FFFFFF;
+	background: #FFA10A;
+	margin-right: 17px;
+}
+
+
+/***
+ * width
+ * ***/
+.width80px {
+	width: 80px;
+}
+/**
+ *header 
+ * **/
+.index {
+	display: none;
+}
+.header {
+	height: 98px;
+	line-height: 98px;
+}
+.nav {
+	margin-left: 60px;
+}
+.nav-list a{
+	width: 160px;
+	height: 56px;
+	line-height: 56px;
+	background: #b5b7bc;
+	text-align: center;
+	border-radius: 2px;
+
+}
+.nav-list.active a {
+	background: #ff8a3b!important;
+}
+.H-btn {
+	display: inline-block;
+	width: 160px;
+	height: 56px;
+	line-height: 56px;
+	background: #1f88ff;
+	color: #FFFFFF;
+	border-radius: 2px;
+	margin-right: 60px;
+}
+.m-btn {
+	display: inline-block;
+	width: 100px;
+	height: 40px;
+	line-height: 40px;
+	background: #1f88ff;
+	color: #FFFFFF;
+	border-radius: 2px;
+	margin-bottom: 10px;
+	float: right;
+}
+.bff8a3b {
+	background: #ff8a3b!important;
+}
+.bffffff {
+	background: #ffffff!important;
+}
+.label-b {
+	display: inline-block;
+	margin-right: 20px;
+	font-size: 14px;
+	color: #222222;
+	width: 90px;
+	text-align: right;
+}
+
+.label-c {
+	display: inline-block;
+	margin-right: 20px;
+	font-size: 14px;
+	color: #222222;
+	width: 183px;
+	text-align: right;
+}
+
+.label-d {
+	display: inline-block;
+	margin-right: 0px;
+	font-size: 14px;
+	color: #222222;
+	width: 399px;
+	text-align: right;
+}
+
+.layer-box .input {
+	width: 368px;
+	height: 38px;
+	border: 1px solid #dddddd;
+	outline: none;
+	padding-left: 5px;
+	font-size: 14px;
+	color: #222222;
+	box-sizing: border-box;
+}
+
+.layer-box .input-type {
+	width: 115px;
+	height: 38px;
+	border: 1px solid #dddddd;
+	outline: none;
+	padding-left: 5px;
+	font-size: 14px;
+	color: #222222;
+	box-sizing: border-box;
+}
+
+.layer-box .input-type-loss {
+	width: 70px;
+	height: 38px;
+	border: 1px solid #dddddd;
+	outline: none;
+	padding-left: 5px;
+	font-size: 14px;
+	color: #222222;
+	box-sizing: border-box;
+}
+
+.layer-box .input-label {
+	width: 14px;
+	height: 14px;
+	border: 1px solid #dddddd;
+	outline: none;
+	padding-left: 5px;
+	font-size: 14px;
+	margin-left: 3px;
+	color: #222222;
+	box-sizing: border-box;
+}
+
+
+.bf3f5f9 {
+	background: #f3f5f9;
+}
+.warp {
+	padding: 40px 60px;
+	box-sizing: border-box;
+}
+.table table {
+	width: 100%;
+	border: 1px solid #eaeaea!important;
+	border-collapse:collapse;
+}
+.table table thead tr th,.table table tbody tr td {
+	text-align: center;
+}
+.table table thead tr th {
+	height: 40px;
+	/*line-height: 40px;*/
+	background: #f7f8f9;
+	border-right: 1px solid #eaeaea!important;
+	font-size: 12px;
+	color:#666666;
+}
+.table table tbody tr td {
+	padding: 12px;
+	border-right: 1px solid #eaeaea!important;
+	border-bottom: 1px solid #eaeaea!important;
+	font-size: 12px;
+	color: #222222;
+	background: #FFFFFF!important;
+}
+/**
+ * order-administration.style
+ * ***/
+.sidebar {
+	width: 300px;
+	max-width: 300px;
+	margin-right: 40px;
+	text-align: center;
+	background: #FFFFFF;
+	padding-bottom: 3px;
+	border: 1px solid #e0e3ee;
+}
+.user-nav-list .user-nav {
+	height: 63px;
+	line-height: 63px;
+}
+.user-nav-list .active {
+	background: #FF931F;
+}
+.user-nav-list a {
+	display: block;
+}
+.user-nav-list .active a {
+	color: #FFFFFF!important;
+}
+.user-nav-list .active a span{
+	color: #FFFFFF!important;
+}
+.content-main {
+	margin:32px;
+	background: #FFFFFF;
+	box-sizing: border-box;
+}
+.iframe {
+	border: 1px solid #e0e3ee;
+	background: #FFFFFF!important;
+}
+.tab-list .tab {
+	width: 120px;
+	height: 40px;
+	line-height: 40px;
+	border: 1px solid #EAEAEA;
+	font-size: 16px;
+	color: #222222;
+}
+.tab-list .tab:last-child {
+	border-right: 1px solid #EAEAEA;
+}
+.tab-list .active {
+	background: #FF8A3B!important;
+	color: #FFFFFF!important;
+	border: 1px solid #FF8A3B;
+}
+.icon {
+	font-family: inherit;
+
+}
+.btn {
+	width: 140px;
+	height: 40px;
+	text-align: center;
+	border-radius: 2px;
+}
+/**data-entry.style**/
+.data-cont {
+	padding: 40px 120px;
+	min-height: 680px;
+}
+.data-list .input {
+	width: 368px;
+	height: 38px;
+	border: 1px solid #dddddd;
+	outline: none;
+	padding-left: 5px;
+	font-size: 14px;
+	color: #222222;
+	box-sizing: border-box;
+}
+.sub-btn {
+	width: 160px;
+	height: 48px;
+	line-height: 48px;
+	text-align: center;
+	font-size: 20px;
+	color: #FFFFFF;
+	background: #FF8A3B;
+	border-radius: 2px;
+}

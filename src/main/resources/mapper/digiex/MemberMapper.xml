@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.Member">
+    <id column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="token" jdbcType="VARCHAR" property="token" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="area_code" jdbcType="VARCHAR" property="areaCode" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="is_locked" jdbcType="BIT" property="isLocked" />
+    <result column="locked_time" jdbcType="TIMESTAMP" property="lockedTime" />
+    <result column="error_times" jdbcType="INTEGER" property="errorTimes" />
+    <result column="created_by" jdbcType="INTEGER" property="createdBy" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+    <result column="updated_by" jdbcType="INTEGER" property="updatedBy" />
+    <result column="updated_time" jdbcType="TIMESTAMP" property="updatedTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    member_id, token, nick_name, area_code, mobile, is_locked, locked_time, error_times, 
+    created_by, created_time, updated_by, updated_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from member
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from member
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.Member">
+    insert into member (member_id, token, nick_name, 
+      area_code, mobile, is_locked, 
+      locked_time, error_times, created_by, 
+      created_time, updated_by, updated_time
+      )
+    values (#{memberId,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{areaCode,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, #{isLocked,jdbcType=BIT}, 
+      #{lockedTime,jdbcType=TIMESTAMP}, #{errorTimes,jdbcType=INTEGER}, #{createdBy,jdbcType=INTEGER}, 
+      #{createdTime,jdbcType=TIMESTAMP}, #{updatedBy,jdbcType=INTEGER}, #{updatedTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.Member">
+    insert into member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="token != null">
+        token,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="areaCode != null">
+        area_code,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="isLocked != null">
+        is_locked,
+      </if>
+      <if test="lockedTime != null">
+        locked_time,
+      </if>
+      <if test="errorTimes != null">
+        error_times,
+      </if>
+      <if test="createdBy != null">
+        created_by,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+      <if test="updatedBy != null">
+        updated_by,
+      </if>
+      <if test="updatedTime != null">
+        updated_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="token != null">
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="isLocked != null">
+        #{isLocked,jdbcType=BIT},
+      </if>
+      <if test="lockedTime != null">
+        #{lockedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errorTimes != null">
+        #{errorTimes,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        #{updatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="updatedTime != null">
+        #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.Member">
+    update member
+    <set>
+      <if test="token != null">
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="areaCode != null">
+        area_code = #{areaCode,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="isLocked != null">
+        is_locked = #{isLocked,jdbcType=BIT},
+      </if>
+      <if test="lockedTime != null">
+        locked_time = #{lockedTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errorTimes != null">
+        error_times = #{errorTimes,jdbcType=INTEGER},
+      </if>
+      <if test="createdBy != null">
+        created_by = #{createdBy,jdbcType=INTEGER},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedBy != null">
+        updated_by = #{updatedBy,jdbcType=INTEGER},
+      </if>
+      <if test="updatedTime != null">
+        updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.Member">
+    update member
+    set token = #{token,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      area_code = #{areaCode,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      is_locked = #{isLocked,jdbcType=BIT},
+      locked_time = #{lockedTime,jdbcType=TIMESTAMP},
+      error_times = #{errorTimes,jdbcType=INTEGER},
+      created_by = #{createdBy,jdbcType=INTEGER},
+      created_time = #{createdTime,jdbcType=TIMESTAMP},
+      updated_by = #{updatedBy,jdbcType=INTEGER},
+      updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+    where member_id = #{memberId,jdbcType=INTEGER}
+  </update>
+
+
+
+  <select id="listUserByToken" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from member
+    where token = #{token}
+  </select>
+</mapper>

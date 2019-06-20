@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="shortcut icon" href="img/favicon.ico" />
+		<link rel="stylesheet" href="css/reset.css" />
+		<link rel="stylesheet" href="css/style.css" />
+		<link rel="stylesheet" href="js/kkpager/kkpager.css" />
+		<title>持仓订单详情</title>
+	</head>
+	<body>
+		<div class="paddingA30">
+			<div class="margB40">
+				<div class="title margB36">
+					<span class="size18px c222222">持仓订单</span>
+					<span class="size18px c222222 icon">></span>
+					<span class="size18px c222222" id="js-detail-aiName">AI一号</span>
+					<span class="size18px c222222 icon">></span>
+					<span class="size18px c222222">订单详情</span>
+				</div>
+				<div id="js-position-order-detail"></div>
+				<ul class="margB40">
+					<li class="margB15">
+						<label for="" class="label-b">订单编号：</label>
+						<span class="size14px c222222" id="js-detail-orderId"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">AI建仓时间：</label>
+						<span class="size14px c222222" id="js-detail-buyTime"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">币种：</label>
+						<span class="size14px c222222" id="js-ai-type"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">方向：</label>
+						<span class="size14px c222222" id="js-order-type"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓点数：</label>
+						<span class="size14px c222222" id="js-detail-buyPrice"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总手数：</label>
+						<span class="size14px c222222" id="js-detail-totalHands"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总金额：</label>
+						<span class="size14px c222222" id="js-detail-totalFee">$5200</span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓手续费：</label>
+						<span class="size14px c222222" id="js-detail-buyService"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总平仓盈亏：</label>
+						<span class="size14px c222222" id="js-detail-totalWarnings">-</span>
+					</li>
+					<li>
+						<label for="" class="label-b">更新时间：</label>
+						<span class="size14px c222222" id="js-detail-updateTime"></span>
+					</li>
+				</ul>
+				<button class="size14px cffffff bff8a3b btn js-evening-up">平仓</button>
+			</div>
+			<div class="table margB40">
+				<div class="size16px c222222 margB19">用户列表</div>
+				<table>
+					<thead>
+						<tr>
+							<th style="width: 15%;">用户姓名</th>
+							<th style="width: 15%;">手机号码</th>
+							<th style="width: 20%;">下单时间</th>
+							<th style="width: 15%;">手数</th>
+							<th style="width: 20%;">金额（$）</th>
+							<th style="width: 15%;">浮动盈亏</th>
+						</tr>
+					</thead>
+					<tbody id="position-order-detail"></tbody>
+				</table>
+			</div>
+			<div class="clearfix">
+				<div class="size14px c222222 fl">总浮动盈亏是扣除了建仓手续费后的值</div>
+				<div class="fr">
+					<!--分页-->
+					<div id="kkpager" class="clearfix" style="height: 50px;"></div>
+				</div>
+				
+			</div>
+			
+		</div>
+		<!--平仓-->
+		<script type="text/html" id="evening-up-main">
+			<div class="layer-box">
+				<ul class="">
+					<li class="margB15">
+						<label for="" class="label-b">币种：</label>
+						<span class="size14px c222222 js-ai-type"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">方向：</label>
+						<span class="size14px c222222 js-order-type"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总手数：</label>
+						<span class="size14px c222222 js-total-hands"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">总金额：</label>
+						<span class="size14px c222222 js-total-fee"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓点数：</label>
+						<span class="size14px c222222 js-buy-price"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">建仓手续费：</label>
+						<span class="size14px c222222 js-buy-service-price"></span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">平仓时间：</label>
+						<input type="text" class="input" id="sellTime" name="sellTime"/>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">平仓点数：</label>
+						<input type="text" class="input" name="sellPrice"/>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">平仓手续费：</label>
+						<input type="text" class="input" name="sellServiceFee"/><span class="size14px c222222 margL5">$</span>
+					</li>
+					<li class="margB15">
+						<label for="" class="label-b">库存费：</label>
+						<input type="text" class="input" name="inventoryFee" /><span class="size14px c222222 margL5" >$</span>
+					</li>
+					<li class="margB36">
+						<label for="" class="label-b">总平仓盈亏：</label>
+						<input type="text" class="input" name="totalWarnings"/><span class="size14px c222222 margL5">$</span>
+					</li>
+				</ul>
+				<div class="layerBtn clearfix margL115">
+					<button class="fl but bffa10a cffffff margR20 bff8a3b js-sell-sure">确定</button>
+					<button class="fr but bffffff bA cb5b7bc  layui-layer-close">取消</button>
+				</div>
+			</div>
+		</script>
+		<script type="text/html" id="position-order-detail-list">
+			<%for(var i in data){%>
+			<tr>
+				<td><%=data[i].nickName%></td>
+				<td><%=data[i].mobile%></td>
+				<td><%=data[i].createdTime%></td>
+				<td><%=data[i].standardHands%></td>
+				<td><%=data[i].fee%></td>
+				<td><!--$<%=data[i].earnings%>-->-</td>
+			</tr>
+			<%}%>
+		</script>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+	<script type="text/javascript" src="js/style.js"></script>
+	<script type="text/javascript" src="utils/template.js"></script>
+	<script type="text/javascript" src="js/laydate/laydate.js"></script>
+	<script type="text/javascript" src="utils/data.js"></script>
+	<script type="text/javascript" src="utils/utils.js"></script>
+	<script type="text/javascript" src="js/layer/layer.js"></script>
+	<script type="text/javascript" src="js/kkpager/kkpager.js"></script>
+	<script type="text/javascript" src="ps/positionDetails.js"></script>
+</html>

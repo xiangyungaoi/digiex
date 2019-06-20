@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.UserEarningsMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.UserEarnings">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="INTEGER" property="memberId" />
+    <result column="earnings" jdbcType="DECIMAL" property="earnings" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, member_id, earnings, created_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user_earnings
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from user_earnings
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.UserEarnings">
+    insert into user_earnings (id, member_id, earnings, 
+      created_time)
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=INTEGER}, #{earnings,jdbcType=DECIMAL}, 
+      #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.UserEarnings">
+    insert into user_earnings
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="earnings != null">
+        earnings,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="earnings != null">
+        #{earnings,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.UserEarnings">
+    update user_earnings
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="earnings != null">
+        earnings = #{earnings,jdbcType=DECIMAL},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.UserEarnings">
+    update user_earnings
+    set member_id = #{memberId,jdbcType=INTEGER},
+      earnings = #{earnings,jdbcType=DECIMAL},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="userEarningsList" resultType="com.caetp.digiex.dto.api.EarningsDTO">
+      SELECT earnings, created_time createdTime
+      FROM user_earnings
+      WHERE member_id = #{memberId}
+      ORDER BY created_time DESC
+  </select>
+
+  <select id="selectTotalEarnings" resultType="Double">
+    SELECT  SUM(earnings) totalEarnings
+    FROM user_earnings
+    WHERE  member_id = #{memberId}
+  </select>
+
+  <select id="userEarnings" resultType="com.caetp.digiex.dto.api.EarningsUserDTO">
+    SELECT t.memberId, SUM(t.earnings) earnings
+    FROM
+      (SELECT oe.member_id memberId, SUM(oe.earnings) earnings
+      FROM user_order_earnings oe
+      WHERE  DATE_FORMAT(oe.created_time,'%Y-%m-%d') = DATE_FORMAT(#{dateTime},'%Y-%m-%d')
+      GROUP BY oe.member_id
+      UNION ALL
+      SELECT DISTINCT member_id memberId, 0.0 earnings
+      FROM user_order
+      WHERE STATUS IN (1, 2)) t
+    GROUP BY t.memberId
+  </select>
+</mapper>

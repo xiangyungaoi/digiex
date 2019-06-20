@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.AppVersionsMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.AppVersions">
+    <id column="version_no" jdbcType="VARCHAR" property="versionNo" />
+    <id column="version_os" jdbcType="VARCHAR" property="versionOs" />
+    <result column="update_type" jdbcType="VARCHAR" property="updateType" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="version_des" jdbcType="VARCHAR" property="versionDes" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="file_hash" jdbcType="VARCHAR" property="fileHash" />
+    <result column="created_time" jdbcType="TIMESTAMP" property="createdTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    version_no, version_os, update_type, title, version_des, url, file_hash, created_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="map" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from app_versions
+    where version_no = #{versionNo,jdbcType=VARCHAR}
+      and version_os = #{versionOs,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from app_versions
+    where version_no = #{versionNo,jdbcType=VARCHAR}
+      and version_os = #{versionOs,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.AppVersions">
+    insert into app_versions (version_no, version_os, update_type, 
+      title, version_des, url, 
+      file_hash, created_time)
+    values (#{versionNo,jdbcType=VARCHAR}, #{versionOs,jdbcType=VARCHAR}, #{updateType,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{versionDes,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{fileHash,jdbcType=VARCHAR}, #{createdTime,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.AppVersions">
+    insert into app_versions
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="versionNo != null">
+        version_no,
+      </if>
+      <if test="versionOs != null">
+        version_os,
+      </if>
+      <if test="updateType != null">
+        update_type,
+      </if>
+      <if test="title != null">
+        title,
+      </if>
+      <if test="versionDes != null">
+        version_des,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="fileHash != null">
+        file_hash,
+      </if>
+      <if test="createdTime != null">
+        created_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="versionNo != null">
+        #{versionNo,jdbcType=VARCHAR},
+      </if>
+      <if test="versionOs != null">
+        #{versionOs,jdbcType=VARCHAR},
+      </if>
+      <if test="updateType != null">
+        #{updateType,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="versionDes != null">
+        #{versionDes,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="fileHash != null">
+        #{fileHash,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.AppVersions">
+    update app_versions
+    <set>
+      <if test="updateType != null">
+        update_type = #{updateType,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="versionDes != null">
+        version_des = #{versionDes,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="fileHash != null">
+        file_hash = #{fileHash,jdbcType=VARCHAR},
+      </if>
+      <if test="createdTime != null">
+        created_time = #{createdTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where version_no = #{versionNo,jdbcType=VARCHAR}
+      and version_os = #{versionOs,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.AppVersions">
+    update app_versions
+    set update_type = #{updateType,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      version_des = #{versionDes,jdbcType=VARCHAR},
+      url = #{url,jdbcType=VARCHAR},
+      file_hash = #{fileHash,jdbcType=VARCHAR},
+      created_time = #{createdTime,jdbcType=TIMESTAMP}
+    where version_no = #{versionNo,jdbcType=VARCHAR}
+      and version_os = #{versionOs,jdbcType=VARCHAR}
+  </update>
+
+
+  <select id="getLastVersion" resultType="com.caetp.digiex.dto.api.AppVersionsDTO">
+    SELECT url, version_no versionNo ,version_des versionDes, title, file_hash fileHash,
+      (SELECT MAX(update_type)  FROM app_versions  WHERE version_os = #{deviceType} AND version_no > #{apiVersion}) AS updateType
+    FROM app_versions
+    WHERE version_os = #{deviceType} AND version_no >= #{apiVersion} ORDER BY version_no DESC LIMIT 1
+  </select>
+</mapper>

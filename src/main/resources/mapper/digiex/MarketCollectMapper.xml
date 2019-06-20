@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.MarketCollectMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.MarketCollect">
+    <id column="market_id" jdbcType="BIGINT" property="marketId" />
+    <id column="member_id" jdbcType="INTEGER" property="memberId" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map">
+    delete from market_collect
+    where market_id = #{marketId,jdbcType=BIGINT}
+      and member_id = #{memberId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.MarketCollect">
+    insert into market_collect (market_id, member_id)
+    values (#{marketId,jdbcType=BIGINT}, #{memberId,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.MarketCollect">
+    insert into market_collect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="marketId != null">
+        market_id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="marketId != null">
+        #{marketId,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap">
+    SELECT market_id, member_id
+    FROM market_collect
+    WHERE market_id = #{marketId} and member_id = #{memberId}
+  </select>
+</mapper>

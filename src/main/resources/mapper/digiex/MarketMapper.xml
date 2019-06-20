@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.MarketMapper">
+  <resultMap id="BaseResultMap" type="com.caetp.digiex.entity.Market">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="coin" jdbcType="VARCHAR" property="coin" />
+    <result column="coin_name" jdbcType="VARCHAR" property="coinName" />
+    <result column="coin_icon" jdbcType="VARCHAR" property="coinIcon" />
+    <result column="coin_type" jdbcType="VARCHAR" property="coinType" />
+    <result column="is_delete" jdbcType="BIT" property="isDelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, coin, coin_name, coin_icon, coin_type, is_delete
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from market
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from market
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.caetp.digiex.entity.Market">
+    insert into market (id, coin, coin_name, 
+      coin_icon, coin_type, is_delete
+      )
+    values (#{id,jdbcType=BIGINT}, #{coin,jdbcType=VARCHAR}, #{coinName,jdbcType=VARCHAR}, 
+      #{coinIcon,jdbcType=VARCHAR}, #{coinType,jdbcType=VARCHAR}, #{isDelete,jdbcType=BIT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.caetp.digiex.entity.Market">
+    insert into market
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="coin != null">
+        coin,
+      </if>
+      <if test="coinName != null">
+        coin_name,
+      </if>
+      <if test="coinIcon != null">
+        coin_icon,
+      </if>
+      <if test="coinType != null">
+        coin_type,
+      </if>
+      <if test="isDelete != null">
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="coin != null">
+        #{coin,jdbcType=VARCHAR},
+      </if>
+      <if test="coinName != null">
+        #{coinName,jdbcType=VARCHAR},
+      </if>
+      <if test="coinIcon != null">
+        #{coinIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="coinType != null">
+        #{coinType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.caetp.digiex.entity.Market">
+    update market
+    <set>
+      <if test="coin != null">
+        coin = #{coin,jdbcType=VARCHAR},
+      </if>
+      <if test="coinName != null">
+        coin_name = #{coinName,jdbcType=VARCHAR},
+      </if>
+      <if test="coinIcon != null">
+        coin_icon = #{coinIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="coinType != null">
+        coin_type = #{coinType,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null">
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.caetp.digiex.entity.Market">
+    update market
+    set coin = #{coin,jdbcType=VARCHAR},
+      coin_name = #{coinName,jdbcType=VARCHAR},
+      coin_icon = #{coinIcon,jdbcType=VARCHAR},
+      coin_type = #{coinType,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+
+
+
+
+  <select id="list" resultType="com.caetp.digiex.dto.api.MarketDTO">
+    SELECT id, coin, coin_name coinName, coin_icon coinIcon, coin_type coinType, IF(mc.market_id IS NULL, FALSE, TRUE)isCollect
+    FROM market m
+    LEFT JOIN market_collect mc ON m.id = mc.market_id AND mc.member_id = #{memberId}
+    WHERE coin_type = #{coinType} AND is_delete = 0
+  </select>
+
+  <select id="collectList" resultType="com.caetp.digiex.dto.api.MarketDTO">
+    SELECT id, coin, coin_name coinName, coin_icon coinIcon, coin_type coinType, IF(mc.market_id IS NULL, FALSE, TRUE)isCollect
+    FROM market_collect mc
+    LEFT JOIN  market m ON mc.market_id = m.id AND mc.member_id = #{memberId}
+    WHERE is_delete = 0
+  </select>
+
+  <select id="getCoinsString" resultType="string">
+    SELECT GROUP_CONCAT(coin)
+    FROM market
+    WHERE coin_type = #{coinType} AND is_delete = 0
+  </select>
+
+  <select id="searchList" resultType="com.caetp.digiex.dto.api.MarketDTO">
+    SELECT m.coin coin, m.coin_name coinName, m.coin_type coinType
+    FROM market m
+    WHERE  m.coin LIKE CONCAT(CONCAT('%',#{keyword}),'%') AND m.is_delete = 0
+  </select>
+
+  <select id="getCoinName" resultType="com.caetp.digiex.dto.api.MarketDTO" >
+   SELECT m.coin coin, m.coin_name coinName
+    FROM market m
+    WHERE m.is_delete = 0
+  </select>
+</mapper>

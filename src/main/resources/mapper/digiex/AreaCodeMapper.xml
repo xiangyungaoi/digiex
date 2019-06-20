@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.caetp.digiex.entity.mapper.AreaCodeMapper">
+
+  <!-- 查询区号列表 -->
+  <select id="getAreaCodeList" resultType="com.caetp.digiex.dto.api.AreaCodeDTO">
+    SELECT id, `area`, `code`
+    FROM area_code
+    WHERE `used` = 1
+    ORDER BY CONVERT(`area` USING gbk) ASC
+  </select>
+</mapper>
